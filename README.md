@@ -1,4 +1,4 @@
 # Glowventory App
 
 ### Application Link
-[Click Here!](https://glowventories.adaptable.app/main/) to access Glowventory by Bella
+[Click Here!](https://glowventory.adaptable.app/main/) to access Glowventory by Bella
