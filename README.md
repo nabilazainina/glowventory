@@ -16,13 +16,9 @@ Setelah membuat repositori di github, hal berikutnya yang saya lakukan adalah me
 
 Dengan ini, repositori glowventory di github akan terduplikasi ke repositori di komputer lokal saya, tapa harus melakukan inisasi git di repositori lokal saya.
 
-Selanjutnya, saya membuat sebuah projek Django baru menggunakan direktori glowventory yang sudah ada di komputer lokal saya. Saya mulai dengan mengaktifkan virtual environment di repositori tempat saya ingin menaruh repositori glowventory saya, untuk mengisolasi package dan dependencies aplikasi agar tidak bertabrakan dengan versi lain di komputer saya menggunakan perintah
+Selanjutnya, saya membuat sebuah projek Django baru menggunakan direktori glowventory yang sudah ada di komputer lokal saya. Saya mulai dengan mengaktifkan virtual environment di repositori tempat saya ingin menaruh repositori glowventory saya, untuk mengisolasi package dan dependencies aplikasi agar tidak bertabrakan dengan versi lain di komputer saya menggunakan perintah ```python -m venv env```. Kemudian, saya mengaktifkan virtual environment dengan perintah ```env\Scripts\activate.bat```. Apabila command prompt saya sudah memiliki kata ```(env)```, artinya saya telah berhasil mengaktifkan virtual environment.
 
-```python -m venv env```
-
-Kemudian, saya mengaktifkan virtual environment dengan perintah ```env\Scripts\activate.bat```. Apabila command prompt saya sudah memiliki kata ```(env)```, artinya saya telah berhasil mengaktifkan virtual environment.
-
-Selanjutnya, saya menyiapkan dependencies atau komponen-komponen yang diperlukan perangkat lunak untuk berfungsi, termasuk library, framework, atau package yang akan membantu developer (seperti saya) untuk memanfaatkan kode yang telah ada. Saya mulai dengan membuat berkas berjudul ```requirements.txt``` dan menambahkan beberapa dependencies, yakni
+Selanjutnya, saya menyiapkan dependencies atau komponen-komponen yang diperlukan perangkat lunak untuk berfungsi, termasuk library, framework, atau package yang akan membantu developer (seperti saya) untuk memanfaatkan kode yang telah ada dengan membuat berkas berjudul ```requirements.txt``` dan menambahkan beberapa dependencies, yakni
 
 ```
 django
@@ -35,17 +31,15 @@ urllib3
 
 Kemudian, saya menginstall dependencies tersebut di lingkungan virtual environment yang sudah saya aktifkan (aktif apabila ada tulisan ```(env)```) dengan menjalankan perintah ```pip install -r requirements.txt```. Terakhir, saya mengaktifkan proyek django dengan menjalankan perintah ```django-admin startproject glowventory .```. 
 
-Untuk bisa menjalankan server, saya mulai dengan menambahkan ```*``` pada ```ALLOWED HOST``` di ```settings.py``` untuk mengizinkan akses ke semua host agar aplikasi glowventory dapat digunakan secara luas. Setelah memastikan direktori dan file di dalam glowventory sudah sesuai, saya menjalankan server Django dengan perintah ```python manage.py runserver```
-
-Jika sudah terlihat roket di http://localhost:8000, Project Django glowventory saya sudah terbuat ^_^
+Untuk bisa menjalankan server, saya mulai dengan menambahkan ```*``` pada ```ALLOWED HOST``` di ```settings.py``` untuk mengizinkan akses ke semua host agar aplikasi glowventory dapat digunakan secara luas. Setelah memastikan direktori dan file di dalam glowventory sudah sesuai, saya menjalankan server Django dengan perintah ```python manage.py runserver```. Setelah membuka http://localhost:8000, terdapat roket yang artinya Project Django glowventory saya sudah terbuat ^_^
 
 ### Membuat aplikasi dengan nama ```main``` pada proyek tersebut
 
-Saya mulai dengan perintah ```python manage.py startapp main``` di terminal untuk membuat aplikasi dengan nama _main_ baru. Setelah itu, akan muncul direktori baru dengan nama ```main``` di dalam repositori glowventory untuk struktur awal aplikasi. Kemudian, saya mendaftarkan aplikasi ```main``` ke proyek dengan menambahkan ```main``` ke dalam ```settings.py``` di proyek glowventory. Dengan step tersebut, aplikasi dengan nama ```main``` sudah terbentuk di repositori glowventory saya ^_^
+Saya mulai dengan perintah ```python manage.py startapp main``` di terminal untuk membuat aplikasi dengan nama _main_ baru. Setelah itu, akan muncul direktori baru dengan nama ```main``` di dalam repositori glowventory. Kemudian, saya mendaftarkan aplikasi ```main``` ke proyek dengan menambahkan line of code ```main``` ke dalam ```settings.py``` di proyek glowventory. Dengan step tersebut, aplikasi dengan nama ```main``` sudah terbentuk di repositori glowventory saya ^_^
 
 ### Melakukan _routing_ pada proyek agar dapat menjalankan aplikasi ```main```
 
-Untuk menghubungkan rute URL dengan tampilan ```main```, saya mulai dengan membuka ```urls.py``` di direktori ```glowventory```**(bukan direktori main)**. Kemudian, saya tambahkan line of code
+Untuk menghubungkan rute URL dengan tampilan ```main```, saya mulai dengan membuka ```urls.py``` di direktori glowventory **(bukan direktori main)**. Kemudian, saya tambahkan line of code
 
 ```
 from django.urls import path, include
@@ -131,7 +125,8 @@ urlpatterns = [
 
 ### Melakukan deployment ke Adaptable terhadap aplikasi yang sudah dibuat sehingga nantinya dapat diakses oleh teman-teman
 
-Pada bagian checklist ini, saya mulai dengan memasukkan akun github yang saya pakai untuk glowventory ke Adaptable.io. Kemudian, saya lanjutkan dengan memencet _New App_ pada Adaptable dan memilih repository ```glowventory``` dan memilih _branh main_ sebagai _deployment branch_ saya. Kemudian saya pilih ```Python App Template``` sebagai _template deployment_. Lalu ```Postfre SQL``` sebagai tipe basis data. Saya masukkan python 3.10 sesuai dengan versi python di komputer saya, dan memasukkan perintah ```python manage.py migrate && gunicorn shopping_list.wsgi``` untuk Start COmmand. Saya masukkan nama aplikasi **glowventory** untuk domain situs web saya dan dilanjutkan dengan menndeploy aplikasi. Apabila semua proses terjalankan, Adaptable akan menunjukkan ceklis hijau besar yang artinya aplikasi **glowventory** berhasil dideploy ^_^.
+Pada bagian checklist ini, saya mulai dengan memasukkan akun github yang saya pakai untuk glowventory ke Adaptable.io. Kemudian, saya lanjutkan dengan memencet _New App_ pada Adaptable dan memilih repository ```glowventory``` dan memilih _branh main_ sebagai _deployment branch_ saya. Kemudian, saya pilih ```Python App Template``` sebagai _template deployment_ dan ```Postfre SQL``` sebagai tipe basis data. Saya masukkan python 3.10 sesuai dengan versi python di komputer saya, dan memasukkan perintah ```python manage.py migrate && gunicorn shopping_list.wsgi``` untuk Start Command. Saya masukkan nama aplikasi **glowventory** untuk domain situs web saya dan dilanjutkan dengan menndeploy aplikasi. Apabila semua proses terjalankan, Adaptable akan menunjukkan ceklis hijau besar yang artinya aplikasi **glowventory** berhasil dideploy ^_^.
+
 
 ## Buatlah bagan yang berisi _request client_ ke web aplikasi berbasis Django beserta responnya dan jelaskan pada bagan tersebut kaitan antara ```urls.py```, ```views.py``, ````models.py```, dan berkas ```html```
 
