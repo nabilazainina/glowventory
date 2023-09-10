@@ -1,7 +1,8 @@
-# Glowventory App
+# Welcome to Glowventory :revolving_hearts:
 
 ### Application Link
 [Click Here!](https://glowventory.adaptable.app/main/) to access Glowventory by Bella :smiley:
+
 
 ## Jelaskan bagimana cara kamu mengimplementasikan checklist di atas secara step-by-step
 
@@ -42,9 +43,9 @@ Jika sudah terlihat roket di http://localhost:8000, Project Django glowventory s
 
 Saya mulai dengan perintah ```python manage.py startapp main``` di terminal untuk membuat aplikasi dengan nama _main_ baru. Setelah itu, akan muncul direktori baru dengan nama ```main``` di dalam repositori glowventory untuk struktur awal aplikasi. Kemudian, saya mendaftarkan aplikasi ```main``` ke proyek dengan menambahkan ```main``` ke dalam ```settings.py``` di proyek glowventory. Dengan step tersebut, aplikasi dengan nama ```main``` sudah terbentuk di repositori glowventory saya ^_^
 
-*Melakukan _routing_ pada proyek agar dapat menjalankan aplikasi ```main```*
+### Melakukan _routing_ pada proyek agar dapat menjalankan aplikasi ```main```
 
-Untuk menghubungkan rute URL dengan tampilan ```main```, saya mulai dengan membuka ```urls.py``` di direktori ```glowventory```*(bukan direktori main)*. Kemudian, saya tambahkan line of code
+Untuk menghubungkan rute URL dengan tampilan ```main```, saya mulai dengan membuka ```urls.py``` di direktori ```glowventory```**(bukan direktori main)**. Kemudian, saya tambahkan line of code
 
 ```
 from django.urls import path, include
