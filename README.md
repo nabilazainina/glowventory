@@ -1,11 +1,11 @@
 # Glowventory App
 
 ### Application Link
-[Click Here!](https://glowventory.adaptable.app/main/) to access Glowventory by Bella
+[Click Here!](https://glowventory.adaptable.app/main/) to access Glowventory by Bella :smiley:
 
 ## Jelaskan bagimana cara kamu mengimplementasikan checklist di atas secara step-by-step
 
-*Membuat Project Django baru*
+### Membuat Project Django baru
 
 Pada aplikasi Glowventory ini, saya memulai dengan membuat repositori baru bernama "glowventory" di github saya. Saya pastikan untuk mengatur visibilitas repositori saya sebagai public agar bisa dilihat dan diakses pihak luar. 
 
@@ -38,7 +38,7 @@ Untuk bisa menjalankan server, saya mulai dengan menambahkan ```*``` pada ```ALL
 
 Jika sudah terlihat roket di http://localhost:8000, Project Django glowventory saya sudah terbuat ^_^
 
-*Membuat aplikasi dengan nama ```main``` pada proyek tersebut*
+### Membuat aplikasi dengan nama ```main``` pada proyek tersebut
 
 Saya mulai dengan perintah ```python manage.py startapp main``` di terminal untuk membuat aplikasi dengan nama _main_ baru. Setelah itu, akan muncul direktori baru dengan nama ```main``` di dalam repositori glowventory untuk struktur awal aplikasi. Kemudian, saya mendaftarkan aplikasi ```main``` ke proyek dengan menambahkan ```main``` ke dalam ```settings.py``` di proyek glowventory. Dengan step tersebut, aplikasi dengan nama ```main``` sudah terbentuk di repositori glowventory saya ^_^
 
@@ -59,7 +59,7 @@ urlpatterns = [
 > [!NOTE]
 > Bagian kode ini akan mengatur rute URL tingkat proyek di proyek glowventory saya. Fungsi ```include``` akan mengimpor rute URL dari aplikasi ```main``` ke dalam berkas ```urls.py``` proyek glowventory. Sementara itu, path ```'main/'``` ini akan digunakan untuk mengarahkan rute yang didefinisikan. Oleh karena itu, untuk mengakses tampilan main melalui link adaptable, kita harus menambahkan ```\main``` di akhir.
 
-*Membuat model pada aplikasi ```main``` dengan nama ```Item``` dan memiliki atribut wajib ```name```, ```amount```, dan ```description```*
+### Membuat model pada aplikasi ```main``` dengan nama ```Item``` dan memiliki atribut wajib ```name```, ```amount```, dan ```description```
 
 Untuk menyempurnakan model dalam aplikasi main glowventory, saya mulai dengan membuka berkas ```models.py``` pada direktori ```main```. Kemudian, saya isi berkas ```models.py``` tersebut dengan atribut-atribut sesuai dengan ketentuan yang diharapkan, yaitu
 
@@ -89,7 +89,7 @@ python manage.py migrate
 
 Perintah ```makemigration``` akan membuat suatu berkas migrasi yang berisi perubahan model yang belum diaplikasikan ke basis data. Sementara perintah ```migrate``` akan mengaplikasikan perubahan model ke berkas migrasi basis data.
 
-*Membuat sebuah fungsi pada ```views.py``` untuk dikembalikan ke sebuah template HTML yang menampilkan nama aplikasi, nama, dan kelas*
+### Membuat sebuah fungsi pada ```views.py``` untuk dikembalikan ke sebuah template HTML yang menampilkan nama aplikasi, nama, dan kelas
 
 Saya memulai checklist ini dengan membuat sebuah direktori baru bernama ```templates``` di dalam direktori aplikasi ```main```. Saya lanjutkan dengan membuat berkas baru bernama ```main.html``` yang akan saya isi dengan nama aplikasi, nama, dan kelas saya.
 
@@ -111,7 +111,7 @@ def show_main(request):
 Pada kode di atas, ```context``` adalah dictionary yang valuenya berisi data yang akan dikirim ke tampilan, yakni application_name, name, dan class. Di line paling akhir, fungsi akan merender tampilan dari ```main.html```.
 
 
-*Membuat sebuah __routing_ pada ```urls.py``` aplikasi ```main``` untuk memetakan fungsi yang telah dibuat*
+### Membuat sebuah __routing_ pada ```urls.py``` aplikasi ```main``` untuk memetakan fungsi yang telah dibuat
 
 Pada bagian ini, saya akan mengkonfigurasikan rute url agar aplikasi ```main``` dapat diakses melalui peramban web.
 
@@ -128,14 +128,14 @@ urlpatterns = [
 ]
 ```
 
-*Melakukan deployment ke Adaptable terhadap aplikasi yang sudah dibuat sehingga nantinya dapat diakses oleh teman-temanmu melalui Internet.*
+### Melakukan deployment ke Adaptable terhadap aplikasi yang sudah dibuat sehingga nantinya dapat diakses oleh teman-teman
 
-Pada bagian checklist ini, saya mulai dengan memasukkan akun github yang saya pakai untuk glowventory ke Adaptable.io. Kemudian, saya lanjutkan dengan memencet _New App_ pada Adaptable dan memilih repository ```glowventory``` dan memilih _branh main_ sebagai _deployment branch_ saya. Kemudian saya pilih ```Python App Template``` sebagai _template deployment_. Lalu ```Postfre SQL``` sebagai tipe basis data. Saya masukkan python 3.10 sesuai dengan versi python di komputer saya, dan memasukkan perintah ```python manage.py migrate && gunicorn shopping_list.wsgi``` untuk Start COmmand. Saya masukkan nama aplikasi *glowventory* untuk domain situs web saya dan dilanjutkan dengan menndeploy aplikasi. Apabila semua proses terjalankan, Adaptable akan menunjukkan ceklis hijau besar yang artinya aplikasi *glowventory* berhasil dideploy ^_^.
+Pada bagian checklist ini, saya mulai dengan memasukkan akun github yang saya pakai untuk glowventory ke Adaptable.io. Kemudian, saya lanjutkan dengan memencet _New App_ pada Adaptable dan memilih repository ```glowventory``` dan memilih _branh main_ sebagai _deployment branch_ saya. Kemudian saya pilih ```Python App Template``` sebagai _template deployment_. Lalu ```Postfre SQL``` sebagai tipe basis data. Saya masukkan python 3.10 sesuai dengan versi python di komputer saya, dan memasukkan perintah ```python manage.py migrate && gunicorn shopping_list.wsgi``` untuk Start COmmand. Saya masukkan nama aplikasi **glowventory** untuk domain situs web saya dan dilanjutkan dengan menndeploy aplikasi. Apabila semua proses terjalankan, Adaptable akan menunjukkan ceklis hijau besar yang artinya aplikasi **glowventory** berhasil dideploy ^_^.
 
 ## Buatlah bagan yang berisi _request client_ ke web aplikasi berbasis Django beserta responnya dan jelaskan pada bagan tersebut kaitan antara ```urls.py```, ```views.py``, ````models.py```, dan berkas ```html```
 
 
-*Bagan*
+**Bagan**
 
 ```
 
@@ -191,10 +191,10 @@ Penjelasan Proses:
 
 
 Oleh karena itu, beberapa kaitan dan fungsi ringkas dari ```urls.py```, ```views.py```, ```models.py```, dan ```Berkas HTML``` adalah :
-1. *urls.py* = urls.py adalah tempat yang digunakan untuk mengatur URL-routing dalam aplikasi Django agar bisa mengarahkan permintaan client ke view yang sesuai
-2. *views.py* = views.py adalah tempat yang berisi definisi dari view yang mengatur logika aplikasi. Bagian ini adalah tempat di mana permintaan client diproses dan respon dibuat. View akan mengambil data dari model jika diperlukan dan mengembalikan berkas HTML yang akan ditampilkan ke pengguna
-3. *models.py* = models.py akan berisi definisi model-data untuk aplikasi. Model-data akan merepresentasikan objek dalam aplikasi dan akan digunakan oleh view untuk mengambil, mengubah, atau menyimpan data.
-4. *Berkas HTML* = Berkas HTML digunakan untuk menampilkan konten yang akan diberikan kepada klien dan berisi struktur dan tampilan halaman web yang akan ditampilkan kepada pengguna
+1. **urls.py** = urls.py adalah tempat yang digunakan untuk mengatur URL-routing dalam aplikasi Django agar bisa mengarahkan permintaan client ke view yang sesuai
+2. **views.py** = views.py adalah tempat yang berisi definisi dari view yang mengatur logika aplikasi. Bagian ini adalah tempat di mana permintaan client diproses dan respon dibuat. View akan mengambil data dari model jika diperlukan dan mengembalikan berkas HTML yang akan ditampilkan ke pengguna
+3. **models.py** = models.py akan berisi definisi model-data untuk aplikasi. Model-data akan merepresentasikan objek dalam aplikasi dan akan digunakan oleh view untuk mengambil, mengubah, atau menyimpan data.
+4. **Berkas HTML** = Berkas HTML digunakan untuk menampilkan konten yang akan diberikan kepada klien dan berisi struktur dan tampilan halaman web yang akan ditampilkan kepada pengguna
 
 ## Jelaskan mengapa kita menggunakan virtual environment? Apakah kita tetap dapat membuat aplikasi web berbasis Django tanpa menggunakan virtual environment?
 
