@@ -64,11 +64,7 @@ class Items(models.Model):
     category = models.TextField()
 ```
 
-Dengan ini, saya telah menambahkan beberapa atribut baru ke dalam model aplikasi main saya, yaitu
-    - ```name``` merepresentasikan nama item (dalam glowventory, nama skincare ^_^) dengan tipe ```CharField```
-    - ```amount``` sebagai jumlah _item_ (dalam glowventory, nama skincare ^_^) dengan tipe ```IntegerField```
-    - ```description``` sebagai deskripsi item (dalam glowventory, nama skincare ^_^) dengan tipe ```TextField```
-    - Lalu, saya juga menambahkan _additional_ atribut, yakni ```category``` yang akan menampilkan kategori dari _skintype_ user seperti _dry_, _oily_, atau _combination to normal skin_ dengan tipe ```TextField```
+Dengan ini, saya telah menambahkan beberapa atribut baru ke dalam model aplikasi main saya, yaitu ```name``` merepresentasikan nama item (dalam glowventory, nama skincare ^_^) dengan tipe ```CharField```, ```amount``` sebagai jumlah _item_ (dalam glowventory, nama skincare ^_^) dengan tipe ```IntegerField```, ```description``` sebagai deskripsi item (dalam glowventory, nama skincare ^_^) dengan tipe ```TextField```. Lalu, saya juga menambahkan _additional_ atribut, yakni ```category``` yang akan menampilkan kategori dari _skintype_ user seperti _dry_, _oily_, atau _combination to normal skin_ dengan tipe ```TextField``` dan ```price``` yang akan menampilkan harga dari skincare user dengan tipe ```IntegerField```
 
 Setelah itu, saya memigrasi model agar Django dapat melacak perubahan model basis data glowventory, dengan menjalankan perintah
 
