@@ -126,42 +126,44 @@ Pada bagian checklist ini, saya mulai dengan memasukkan akun github yang saya pa
 ```
 
                                                     
-   Client Request       ----->          Django        
-   (HTTP Request)                     Web Server    
-                                                    
-                          |
-                          |
-                          v
-                                      
-                       Django View    
-                       (views.py)     
-                                      
-                          |
-                          |
-                          v
-                                      
-                        Model Data     
-                       (models.py)   
-                                      
++---------------------+        +-------------------+
+|   Client Request    |        |    Django Web     |
+| (HTTP Request)      |   -->  |     Server        |
++---------------------+        +-------------------+
                            |
                            |
                            v
-                                      
-                       HTML Template  
-                       (HTML File)    
-                                      
+                 +--------------------+
+                 |    Django View     |
+                 |    (views.py)      |
+                 +--------------------+
                            |
                            |
                            v
-                                      
-                      Server Response 
-                      (HTTP Response) 
-                                      
+                 +--------------------+
+                 |    Model Data      |
+                 |    (models.py)     |
+                 +--------------------+
                            |
                            |
                            v
-                                      
-                      Client Browser 
+                 +--------------------+
+                 |    HTML Template   |
+                 |    (HTML File)     |
+                 +--------------------+
+                           |
+                           |
+                           v
+                +--------------------+
+                |  Server Response   |
+                |  (HTTP Response)   |
+                +--------------------+
+                           |
+                           |
+                           v
+                +--------------------+
+                |  Client Browser    |
+                +--------------------+
                                       
 
 ```
