@@ -214,3 +214,148 @@ Secara teknis, kita tetap bisa membuat aplikasi web berbasis Django tanpa Virtua
     * ViewModel: ViewModel adalah komponen baru salam MVVM yang bertindak sebagai perantara antara Model dan View. ViewModel berisi logika presentasi yang memformat data dari Model agar dapat ditampilkan dengan baik di View sehingga berfungsi sebagai pengubung antara Model dan View
 
 Perbedaan signifikan antara ketiga pola di atas adalah *peran dan fokus masing-masing terhadap pemisahan tanggung jawab dan kendali aplikasi*. MVC adalah pola yang umum digunakan dalam pengembangan aplikasi web sementara MVT adalah varian MVC yang digunakan dengan framework Django. Sementara itu, MVVM biasanya digunakan dalam pengembangan aplikasi berbasis klien yang memungkinkan tampilan yang lebih responsif. Pilihan antara ketiganya tergantung pada jenis aplikasi yang dikembangkan.
+
+## Perbedaan antara form ```POST``` dan form ```GET``` dalam Django
+
+```GET``` dan ```POST``` adalah dua metode HTTP yang dugunakan saat berurusan dengan formulir.
+
+* ```POST``` : Formulir login pada Django menggunakan metode ```POST``` yang akan mengumpulkan data formulir, mengenkripsi untuk pengiriman dan mengirimnya ke derver sebelum menerima respons. Untuk permintaan yang mengubah keadaan sistem -misalnya, permintaan yang membuat perubahan dalam database- harus menggunakan ```POST```. Selain itu, metode ```POST``` juga menawarkan lebih banyak kontrol atas akses -misalnya, formulir yang membutuhkan kata sandi-.
+
+* ```GET``` : Metoe ```GET``` akan mengumpulkan data yang diserahkan ke dalam sebuah string, dan menggunakannya untuk membentuk URL. URL akan berisi alamat tempat data akan dikirimkan beserta kunci dan nilai data. Metode ```GET``` hanya bisa digunakan untuk permintaan yang tidak memengaruhi keadaan sistem dan juga tidak cocok untuk formulir kata sandi, dikarenakanan kata sandi akan muncul di URL sedemikian rupa dan akan tercata pada peramban dan log server dalam teks biasa sehingga menimbulkan risiko keamanan. Di sisi lain, GET cocok untuk hal-hal seperti formulir pencarian web, karena URL yang mewakili permintaan GET dapat dengan mudah ditandai, dibagikan, atau diajukan kembali.
+
+## Perbedaan utama antara XML, JSON, dan HTML dalam konteks pengiriman data
+
+- ```XML``` **eXtensible Markup Language** : XML adalah sebuah bahasa dan format file untuk menyimpan, mengirim, dan membangun kembali berbagai jenis data. XML didesain menjadi _self-descriptive_ dan harus mengandung **sebuah root _element_** uang merupakan _parent_ dari elemen lainnya, sehingga dengan membaca XML tersebut kita bisa mengerti informasi apa yang ingin disampaikan dari data yang tertulis. XML hanya berisi informasi yang dibungkus dalam _tag_ sehingga kita harus menulis program untuk mengirim, menerima, menyimpan, atau menampilkan informasi tersebut.
+
+- ```JSON``` **JavaScript Object Notation** : JSON merupakan format file dan format pertukaran data standar yang menggunakan teks yang mudah dibaca manusia untuk menyimpan dan mengirimkan objek data yang terdiri dari pasangan atribut-nilai. JSON sendiri didesain menjadi _self-describing_, sehingga JSON sangat mudah untuk dimengerti. JSON dapat digunakan di bebragai aplikasi web maupun mobile, yaitu untuk menyimpan dan mengirimkan data.
+
+- ```HTML``` **HyperText Markup Language** : HTML adalah bahasa markup yang digunakan oleh peramban web untuk mengartikan dan menyusun teks, gambar, dan materi lainnya menjadi halaman web yang dapat dilihat atau didengar.Dokumen HTML memiliki struktur yang terdiri dari elemen-elemen HTML bertingkat. Elemen-elemen ini ditandai dalam dokumen dengan menggunakan tag HTML. 
+
+> [!NOTE]
+> Berdasarkan pemaparan ketiganya, perbedaan mendasar antara ketiga format tersebut adalah ```XML``` dan ```JSON``` digunakan untuk menyimpan dan mengirim data, sementara ```HTML``` digunakan untuk menjelaskan bagaimana data tersebut ditampilkan.
+
+
+## Mengapa JSON sering digunakan dalam pertukaran data antara aplikasi web modern?
+
+Seperti yang dipaparkan pada pertanyaan di atas, salah satu keunggulan JSON adalah kesederhanaan dan kemudahan membacanya. JSON mudah untuk ditulis dan dipahami, karena menggunakan format yang bisa dimengerti manusia dengan _keys_ dan _values_ nya. JSON tidak memerlukan tag, atribut, atau skema khusus seperti XML sehingga lebih mudah untuk dilihat dan dibaca.
+
+## Jelaskan bagaimana cara kamu mengimplementasikan _checklist_ di atas secara _step=by-step_
+
+### :white_check_mark: Membuat input ```form``` untuk menambahkan objek model pada app sebelumnya
+
+Untuk menambahkan input ```form```, saya mulai dengan membuat **skeleton** yang berfungsi sebagai kerangka views dari glowventory. Kerangka views ini akan memastikan adanya konsistensi di desain situs web dan memperkecil kemungkinan terjadinya redundansi kode. 
+
+Saya mulai dengan membuat folder ```templates``` pada root folder dan membuat sebuah file HTML baru bernama ```base.html``` yang akan menjadi _template_ dasar. Setelah itu, saya lanjutkan dengan mengisi baris ```TEMPLATES``` pada ```settings.py``` pada subdirektori ```shopping_list``` untuk memastikan file ```base.html``` terdeteksi sebagai berkas _template_ dengan line of code
+
+```
+'DIRS': [BASE_DIR / 'templates']
+```
+
+Lalu saya lanjutkan dengan mengganti kode di ```main.html```  pada subdirektori ```templates``` dalam direktori ```main``` untuk membuat ```base.html``` sebagai _template_ utama dengan kode.
+
+```
+{% extends 'base.html' %}
+```
+
+Step berikutnya adalah saya mulai mengeksekusi form input data. Fungsi form ini adalah untuk menginput data barang pada aplikasi. Saya mulai dengan membuat file baru ```forms.py``` pada direktori ```main``` yang akan membuat struktur _form_ agar bisa menerima data produk baru sesuai dengan models, yakni menambahkan kode
+
+```
+from django.forms import ModelForm
+from main.models import Item
+
+class ItemForm(ModelForm):
+    class Meta:
+        model = Item
+        fields = ["name", "amount", "price", "description", "category"]
+```
+
+* ```model = Item``` adalah line of code yang akan menunjukan model untuk form. Data form akan disimpan dan isisnya akan disimpan menjadi _object_ ```item```
+* ```fields = ["name", "amount", "price", "description", "category"]``` adalah _fields_ dari Item yang digunakan untuk form sesuai dengan models glowventory
+
+
+### :white_check_mark: Tambahkan 5 fungsi ```views``` untuk melihat objek yang sudah ditambahkan dalam format HTML, XML, JSON, XML by ID dan JSON by ID
+
+* ```HTML``` :
+    Setelah membuat form di checklist sebelumnya, saya lanjutkan dengan membuat function ```create_item``` pada ```views.py``` dengan mengimport ```ItemForm``` dari ```main.forms``` dan ```reverse``` dari ```django.urls``` pada file ```views.py```. 
+
+    ```
+    def create_item(request):
+        form = ItemForm(request.POST or None)
+
+        if form.is_valid() and request.method == "POST":
+            form.save()
+            return HttpResponseRedirect(reverse('main:show_main'))
+
+        context = {'form': form}
+        return render(request, "create_item.html", context)
+    ```
+
+    Lalu, saya menambahkan line of code ```item = Item.objects.all()``` pada fungsi ```show_main``` untuk mengambil seluruh object Items yang tersimban di database. Serta menambahkan variabel ```items : item,``` pada dictionary ```context```. 
+    
+
+* ```XML``` :
+    Untuk mengembalikan data dalam bentuk XML, saya mulai dengan menambah _import_ ```HttpResponse``` dan ```serializerz``` pada ```views.py```.
+
+    Selanjutnya, masih di file yang sama, saya implementasikan fungsi pertama yang akan mengembalikan data dalam bentuk XML dengan menambah function ```show_xml```. Fungsi ```show_xml``` akan menyimpan keseluruhan hasil _query_ dari ```Item``` mereturn berupa ```HttpResponse``` yang berisi parameter data hasil _query_ yang diserialisasi menjadi XML dan parameter ```content_type="application/xml"``` .
+
+    ```
+    def show_xml(request):
+    data = Item.objects.all()
+    return HttpResponse(serializers.serialize("xml", data), content_type="application/xml")
+    ```
+
+* ```JSON``` :
+
+    Untuk mengembalikan data dalam bentu JSON, saya mulai dengan menambah menambah function ```show_json```. Fungsi ```show_json``` akan menerima parameter ```request``` dan menyimpan hasil _query_ dari seluruh data yang ada pada ```Item``` dan akan mereturn ```HttpResponse``` (yang sudah diimport) yang berisi hasil _query_ yang serialisasi menjadi JSON dan parameter ```content_type="application/json"```.
+
+    ```
+    def show_json(request):
+    data = Item.objects.all()
+    return HttpResponse(serializers.serialize("json", data), content_type="application/json")
+    ```
+
+* ```XML by ID``` dan ```JSON by ID``` :
+
+    Kedua metode ini akan mengembalikan data sesuai dengan index ID dari input item. Saya mulai dengan menambahkan dua fungsi baru yaitu ```def show_xml_by_id``` dan ```def show_json_by_id``` dengan parameter yang sama yaitu ```(request, id)```. 
+    
+    ```
+    def show_xml_by_id(request, id):
+    data = Item.objects.filter(pk=id)
+    return HttpResponse(serializers.serialize("xml", data), content_type="application/xml")
+
+    def show_json_by_id(request, id):
+    data = Item.objects.filter(pk=id)
+    return HttpResponse(serializers.serialize("json", data), content_type="application/json")
+    ```
+    Fungsi ini akan menerima request sesuai dengan ID atau index product dan mengembalikannya ke views JSON atau XML.
+
+### :white_check_mark: Membuat routing URL untuk masing-masing ```views``` yang telah ditambahkan pada poin 2.
+
+* ```HTML``` :
+
+    Setelah membuat fungsi ```create_item```,  saya lanjutkan dengan membuat sebuah berkas HTML baru dengan nama ```create_item.html``` di folder ```templates``` yang akan menampilkan _fields_ form sebagai table.
+
+    Setelah membuat berkas ```create_item.html``` saya lanjutkan dengan mengimport ```create_item``` pada ```urls.py``` di subdirektori ```main``` dan menambahkan path urls ```create-item``` ke fungsi ```urlspatterns``` dengan line of code ```path('create-item/', create_item, name='create_item'),``` untuk merouting keseluruhan views dari fungsi ```create_item``` melalui HTML.
+
+* ```XML``` :
+
+    Setelah menyelesaikan fungsi ```show_xml```, saya lanjutkan dengan mengimport fungsi ```show_xml``` ke ```urls.py``` dan menambahkan path ```path('xml/', show_xml, name='show_xml'), ``` untuk bisa mengakses proyek Django melalui http://localhost:8000/xml.
+
+* ```JSON``` :
+
+    Setelah menyelesaikan fungsi ```show_json```, saya mengimport  fungsi ```show_json``` ke ```urls.py``` dan menambahkan path ```path('json/', show_json, name='show_json'), ``` untuk bisa mengakses proyek Django melalui http://localhost:8000/json.
+
+* ```XML by ID``` dan ```JSON by ID``` :
+
+    Setelah menyelesaikan kedua fungsi ```show_xml_by_id``` dan ```show_json_by_id```, saya lanjutkan dengan mengimport kedua fungsi tersebut ke ```urls.py``` di ```main``` dan menambahkan path
+    ```
+    path('xml/<int:id>/', show_xml_by_id, name='show_xml_by_id'),
+    path('json/<int:id>/', show_json_by_id, name='show_json_by_id'),
+    ```
+    untuk bisa mengakses proyek Django melalui  http://localhost:8000/xml/[id] atau http://localhost:8000/json/[id] sesuai dengan id item yang diinginkan
+
+## Mengakses kelima URL di poin 2 menggunakan Postman, membuat screenshot dari hasil akses URL pada Postman, dan menambahkannya ke dalam README.md.
+
+
+
+
