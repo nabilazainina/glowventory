@@ -357,5 +357,28 @@ class ItemForm(ModelForm):
 ## Mengakses kelima URL di poin 2 menggunakan Postman, membuat screenshot dari hasil akses URL pada Postman, dan menambahkannya ke dalam README.md.
 
 
+**XML**
+
+<img width="644" alt="xml fix" src="https://github.com/nabilazainina/glowventory/assets/112367952/eb1e6832-8905-4a9b-a5cf-a41083166225">
+
+
+**JSON**
+
+<img width="651" alt="json" src="https://github.com/nabilazainina/glowventory/assets/112367952/f565a07e-9587-402d-9995-cdbb58191aa9">
+
+
+**HTML (create-item)**
+
+<img width="668" alt="create-item" src="https://github.com/nabilazainina/glowventory/assets/112367952/3eb6e9e3-d641-4bdd-97cb-87b1893bdc1d">
+
+
+**XML by ID**
+
+<img width="665" alt="xml 1" src="https://github.com/nabilazainina/glowventory/assets/112367952/80983a68-6e49-428e-8cef-8d41d976eb9b">
+
+
+**JSON by ID**
+
+<img width="417" alt="json 2" src="https://github.com/nabilazainina/glowventory/assets/112367952/4a954ba7-dbb5-41cd-a400-43fb1e5bc009">
 
 
