@@ -1,7 +1,10 @@
-{% extends 'base.html' %} 
+{% extends 'base.html' %}
 
-{% block content %}
+{% block meta %}
+    <title>Register</title>
+{% endblock meta %}
 
+{% block content %} 
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap');
     body {
@@ -12,7 +15,7 @@
         padding: 0;
     }
     h1, h5, p {
-        color: #2196F3; /* Soft Blue */
+        color: #00838f; /* Soft Blue */
         margin: 5px 0; /* Mengatur margin atas dan bawah */
     }
     table {
@@ -22,12 +25,11 @@
         border-spacing: 0 15px; /* Jarak antar border diperbesar */
     }
     table, th, td {
-        border: 2px solid #FF4081; /* Pink Blue */
+        border: 2px solid #81c784; /* Soft Green */
         padding: 10px;
-        border-radius: 10px; /* Border tidak tajam */
     }
     th {
-        background-color: #FF4081; /* Pink Blue */
+        background-color: #81c784; /* Soft Green */
         color: white; /* Warna teks header putih */
     }
     td {
@@ -35,38 +37,46 @@
     }
     a {
         text-decoration: none;
-        color: #2196F3; /* Soft Blue */
+        color: #00838f; /* Soft Blue */
     }
     button {
-        background-color: #2196F3; /* Soft Blue */
+        background-color: #00838f; /* Soft Blue */
         color: white; /* Warna teks button putih */
         border: none;
         padding: 10px 20px;
         cursor: pointer;
-        border-radius: 10px; /* Border tidak tajam */
     }
     button:hover {
-        background-color: #0D47A1; /* Darker Soft Blue on hover */
+        background-color: #004d40; /* Darker Soft Blue on hover */
     }
     p {
         margin: 5px 0; /* Mengurangi margin */
     }
-</style>
+</style> 
 
+<div class = "login">
+    
+    <h1>Register</h1>  
 
-<h1>Add New Product</h1>
+        <form method="POST" >  
+            {% csrf_token %}  
+            <table>  
+                {{ form.as_table }}  
+                <tr>  
+                    <td></td>
+                    <td><input type="submit" name="submit" value="Daftar"/></td>  
+                </tr>  
+            </table>  
+        </form>
 
-<form method="POST">
-    {% csrf_token %}
-    <table>
-        {{ form.as_table }}
-        <tr>
-            <td></td>
-            <td>
-                <input type="submit" value="Add Item"/>
-            </td>
-        </tr>
-    </table>
-</form>
+    {% if messages %}  
+        <ul>   
+            {% for message in messages %}  
+                <li>{{ message }}</li>  
+                {% endfor %}  
+        </ul>   
+    {% endif %}
 
-{% endblock %}
+</div>  
+
+{% endblock content %}

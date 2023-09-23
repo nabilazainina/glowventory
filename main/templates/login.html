@@ -1,0 +1,95 @@
+{% extends 'base.html' %}
+
+
+{% block meta %}
+    <title>Login</title>
+{% endblock meta %}
+
+{% block content %}
+
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap');
+    body {
+        font-family: 'Poppins', sans-serif;
+        background-color: #e0f7fa; /* Soft Blue */
+        text-align: center;
+        margin: 0;
+        padding: 0;
+    }
+    h1, h5, p {
+        color: #00838f; /* Soft Blue */
+        margin: 5px 0; /* Mengatur margin atas dan bawah */
+    }
+    table {
+        width: 80%; /* Lebar tabel diperbesar */
+        margin: 10px auto; /* Margin disesuaikan */
+        border-collapse: separate; /* Menggunakan border-collapse: separate */
+        border-spacing: 0 15px; /* Jarak antar border diperbesar */
+    }
+    table, th, td {
+        border: 2px solid #81c784; /* Soft Green */
+        padding: 10px;
+    }
+    th {
+        background-color: #81c784; /* Soft Green */
+        color: white; /* Warna teks header putih */
+    }
+    td {
+        background-color: #f0f0f0; /* Warna latar sel abu-abu muda */
+    }
+    a {
+        text-decoration: none;
+        color: #00838f; /* Soft Blue */
+    }
+    button {
+        background-color: #00838f; /* Soft Blue */
+        color: white; /* Warna teks button putih */
+        border: none;
+        padding: 10px 20px;
+        cursor: pointer;
+    }
+    button:hover {
+        background-color: #004d40; /* Darker Soft Blue on hover */
+    }
+    p {
+        margin: 5px 0; /* Mengurangi margin */
+    }
+</style>
+
+<div class = "login">
+
+    <h1 style="color:blue;">Login</h1>
+
+    <form method="POST" action="">
+        {% csrf_token %}
+        <table>
+            <tr>
+                <td>Username: </td>
+                <td><input type="text" name="username" placeholder="Username" class="form-control"></td>
+            </tr>
+                    
+            <tr>
+                <td>Password: </td>
+                <td><input type="password" name="password" placeholder="Password" class="form-control"></td>
+            </tr>
+
+            <tr>
+                <td></td>
+                <td><input class="btn login_btn" type="submit" value="Login"></td>
+            </tr>
+        </table>
+    </form>
+
+    {% if messages %}
+        <ul>
+            {% for message in messages %}
+                <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}     
+        
+    Don't have an account yet? <a href="{% url 'main:register' %}">Register Now</a>
+
+</div>
+
+{% endblock content %}

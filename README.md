@@ -4,6 +4,9 @@
 [Click Here!](https://glowventory.adaptable.app/main/) to access Glowventory by Bella :smiley:
 
 
+#
+# TUGAS 2
+
 ## Jelaskan bagimana cara kamu mengimplementasikan checklist secara step-by-step
 
 ### :white_check_mark: Membuat Project Django baru
@@ -37,7 +40,7 @@ Saya mulai dengan perintah ```python manage.py startapp main``` di terminal untu
 
 Untuk menghubungkan rute URL dengan tampilan ```main```, saya mulai dengan membuka ```urls.py``` di direktori glowventory **(bukan direktori main)**. Kemudian, saya tambahkan line of code
 
-```
+```py
 from django.urls import path, include
 
 urlpatterns = [
@@ -53,7 +56,7 @@ Bagian kode ini akan mengatur rute URL tingkat proyek di proyek glowventory saya
 
 Untuk menyempurnakan model dalam aplikasi main glowventory, saya mulai dengan membuka berkas ```models.py``` pada direktori ```main```. Kemudian, saya isi berkas ```models.py``` tersebut dengan atribut-atribut sesuai dengan ketentuan yang diharapkan, yaitu
 
-```
+```py
 from django.db import models
 
 class Items(models.Model):
@@ -81,7 +84,7 @@ Saya memulai checklist ini dengan membuat sebuah direktori baru bernama ```templ
 
 Setelah menyelesaikan hal tersebut, saya akan menghubungkan view dengan template dengan membuat sebuah fungsi di ```views.py```. Fungsi yang saya tambahkan adalah fungsi ```show_main```. Saya akan mengimport ```render``` dari ```django.shortcuts``` untuk merender tampilan HTML. Kemudian, saya akan mengisi fungsi ```show_main``` dengan atribut application_name, name, dan class dengan kode seperti berikut
 
-```
+```py
 from django.shortcuts import render
 
 def show_main(request):
@@ -102,7 +105,7 @@ Pada bagian ini, saya akan mengkonfigurasikan rute url agar aplikasi ```main``` 
 
 Step pertama, adalah dengan membuat file bernama ```urls.py``` di dalam direktori ```main``` yang sudah saya buat. Saya akan mengimport ```path``` dari ```django.urls``` untuk bisa mendefinisikan pola URL. Kemudian, saya juga mengimport ```show_main``` dari ```main.views``` yang akan digunakan untuk menghandle request HTTP pada URL tertentu. Lalu, saya akan mendefinisikan ```main```  sebagai isi dari atribut app_name untuk mengidentifikasi aplikasi dalam proyek. Fungsi ```urls.py``` yang saya buat akan bertanggung jawab untuk mengatur rute URL yang terkait dengan aplikasi ```main```
 
-```
+```py
 from django.urls import path
 from main.views import show_main
 
@@ -189,6 +192,10 @@ Oleh karena itu, beberapa kaitan dan fungsi ringkas dari ```urls.py```, ```views
 *Virtual Environment* (venv) adalah framework penting apabila kita melakukan pemebangan aplikasi web dengan bahasa pemrograman Python. Virtual Environment digunakan untuk mengisolasi dependensi dan paket yang digunakan dalam suatu proyek tertentu. Ini berarti, setiap proyek dapat memiliki versi paket Python yang berbeda tanpa saling berpengaruh, sehingga dapat mencegah adanya konflik antar-versi paket. Virtual Environment juga memastikan bahwa perubahan yang dibuat dalam suatu proyek tidak akan memengaruhi iinstalagi Python global dalam sistem sehingga dapat mencegah kerusakan atau konflik yang dapat terjadi apabila kita mengubah paket Python secara global.
 
 Secara teknis, kita tetap bisa membuat aplikasi web berbasis Django tanpa Virtual Environment dengan melakukan instalasi _libraries_ secara global. Akan tetapi, tanpa Virtual Environment, kita harus sangat berhati-hati dengan manahemen paket Python dan versi yang digunakan dalam pengembangan proyek tersebut. Proyek yang dibuat tanpa menggunakan Virtual Environment lebih sulit untuk dikelola dibanding dengan menggunakan Virtual Environment. Oleh karena itu, penggunaan Virtual Environment dalam proses pengembangan aplikasi web merupakan praktik terbaik dalam pengembangan web dengan Django, untuk menjaga kebersihan isolasi, dan portabilitas proyek.
+
+#
+
+# TUGAS 3
 
 ## Jelaskan apakah itu MVC, MVT, dan MVVM dan perbedaan dari ketiganya
 
@@ -380,5 +387,83 @@ class ItemForm(ModelForm):
 **JSON by ID**
 
 <img width="417" alt="json 2" src="https://github.com/nabilazainina/glowventory/assets/112367952/4a954ba7-dbb5-41cd-a400-43fb1e5bc009">
+
+#
+# TUGAS 4
+
+## Apa itu Django ```UserCreationForm```, dan jelaskan apa kelebihan dan kekurangannya?
+
+Django memiliki sistem autentikasi user yang akan menghandle akun, grup, akses, dan cookie-based user session. UserCreationForm sendiri digunakan untuk membuat suatu autentikasi pengguna baru. UserCreationForm pada Django akan membuat dan menyimpan pengguna baru dengan tiga bidang: username, password1, dan password2 untuk konfirmasi kata sandi pertama. UserCreationForm harus diimport dari django.contrib.auth.forms dan merupakan modul bawaan yang mewarisi kelas ModelForm
+
+## Apa perbedaan antara autentikasi dan otorisasi dalam konteks Django, dan mengapa keduanya penting?
+
+Di dalam konteks Django, autentikasi dan otorisasi adalah dua konsep yang berbeda namun saling terkait dalam manajemen pengguna dan akses ke fitur aplikasi web. 
+
+* ```AUTENTIKASI``` Autentikasi adalah proses memverifikasi identitas user yang terhubung ke aplikasi. Autentikasi akan memastikan bahwa pengguna adalah orang yang mereka klaim sebelum diizinkan untuk mengakses lebih lanjut. Django memiliki sistem autentikasi pengguna yang sudah tersedia secara bawaan seperti permission dan groups. Django juga tidak menyajikan beberapa fitur yang sering ditemukan dalam sistem autentikasi web karena masalah umu biasanya sudah diimplementasikan dalam paket eksternal seperti memeriksa kekuatan sandi dll
+
+* ```OTORISASI``` Otorisasi sendiri adalah proses yang menentukan akses dan izin yang dimiliki pengguna yang sudah terverifikasi. Otorisasi ini akan mengontrol apa yang dapat diakses atau dilakukan pengguna setelah berhasil login. Dalam Django sendiri, otorisasi melibatkan pengatursan izin akses dan kontrol akses ke fitur.
+
+> Dengan kata lain, autentikasi akan menverifikasi identitas pengguna yang akan masuk ke aplikasi, sementara otorisasi akan menentukan apa yang diizinkan untuk dilakukan oleh pengguna yang telah terotentikasi.
+
+## Apa itu _cookies_ dalam konteks aplikasi web, dan bagaimana Django menggunakan _cookies_ untuk mengelola data sesi pengguna?
+
+Cookies adalah text file kecil yang dibuat peramban web dan disimpan sebagai respons terhadap permintaan tertentu ke Web-Server. Permintaan tersebut dikirim menggunakan protokol HTTP, namun bersifat _stateless_ atau tanpa status sehingga tidak membantu mengenali apakah pengguna yang masuk merupakan pengguna baru atau pengguna yang telah mengunjungi situs sebelumnya. Django memanfaatkan cookies untuk mengelola informasi sesi pengguna melalui serangkaian metode yang tersedia pada objek HttpResponse. Dalam konteks ini, objek tersebut menawarkan metode untuk mengatur, menghapus, dan membaca cookies, memungkinkan pengelolaan yang efektif terhadap data sesi yang terkait dengan pengguna.
+
+## Apakah penggunaan cookies aman secara default dalam pengembangan web, atau apakah ada risiko potensial yang harus diwaspadai?
+
+Secara umum, cookies sangat aman ketika diimplementasikan dengan benar. Akan tetapi, banyak sekali serangan yang dapat dilakukan melalui cookies. Dalam kondisi yang normal, cookie tidak dapat mentransfer malware atau virus karena data yang dibawa tidak berubah saat berpindah dari komputer lokal ke website dan sebaliknya.
+
+Akan tetapi, pengguna atau developer tetap harus berhati-hati untuk selalu menghindari pengunjungan situs berbahaya dan mencurigakan. Hal tersebut dilakukan untuk mencegah informasi dalam cookie user direbut dari pihak tidak bertanggung jawab.
+
+Contohnya salah satu jenis cookie yakni third-party cookies yang dihasilkan oleh situs web berbeda dari yang pengunjung kunjungi. Misalnya cookies hasil iklan di web-web bajakan dan semacamnya. Pengunjungan situs-switus ilegal atau bajakan dapat menjadi keamanan yang cukup besar karena dapat mengancam privasi pengguna perdasarkan pola penelusuran dan riwayat individu. 
+
+Bahaya lain yang dapat diperhatikan adalah cookie-hijacking, yaitu kegiatan cyberattack yang menargetkan user dengan memanfaatkan section cookies yang tidak terhubung dengan web. 
+
+## Jelaskan secara step-by-step cara kamu mengimplementasikan checklist di atas secara step-by-step
+
+### :white_check_mark: Mengimplementasikan fungsi ```registrasi```, ```login```, dan ```logout`` untuk memungkinkan pengguna untuk mengakses aplikasi sebelumnya dengan lancar
+
+Saya mulai checklist ini dengan menambahkan beberapa import seperti ```redirect```, ```UserCreationForm```, dan ```messages``` pada ```views.py``` untuk mengimpor formulir bawaan yang akan memudahkan pembuatan formulir pendaftaran pengguna dalam aplikasi web. 
+
+Kemudian, saya mulai mengimplementasikan fungsi pertama yaitu fungsi registrasi. Saya membuat suatu function ```register``` yang menerima parameter ```request``` di views.py yang akan membuat UserCreationForm baru, memvalidasi input, serta menyimpan data dari form tersebut. Function juga akan mengembalikan messages apabila akun sudah berhasil tersimpan.
+
+Kemudian, pada file yang sama, saya implementasikan fungsi kedua untuk menghandle login yaitu, ```login_user```. Setelah mengimport ```authenticate``` dan ```login``` dari ```django.contrib.auth```, saya lanjutkan dengan membuat fungsi baru yaitu ```def login_user``` yang menerima parameter ```request```. Function tersebut akan melakukan autentikasi pengguna berdasarkan username dan password yang diterima dari request pengguna yang akan login. 
+
+Selanjutnya, saya akan membuat fungsi terakhir yaitu fungsi ```logout```. Saya akan mengimport ```logout``` dari ```django.contrib.auth``` dan menambahkan potongan kode function ```def logout_user()``` yang akan menghapus sesi pengguna yang masuk dan mengarahkan pengguna ke halaman login dalam aplikasi.
+
+Setelah membuat function untuk views, saya lanjutkan dengan membuat sebuah berkas ```html``` baru untuk masing-masing fungsi yang akan mengimplementasikan register, login, dan logout. Apabila ```register.html```, ```login.html```, dan ```logout.html``` sudah dibuat, saya lanjutkan dengan menambahkan _path url_ dari ketiga function baru (login, logout, register) ke dalam ```urlpatterns``` untuk bisa mengakses ketiga fungsi yang sudah diimport ke ```urls.py``` di main.
+
+### :white_check_mark: Membuat dua akun pengguna dengan masing-masing tiga dummy data menggunakan model yang telah dibuat pada aplikasi sebelumnya untuk setiap akun di lokal
+
+### :white_check_mark: Menghubungkan model ```Item``` dengan ```User```
+
+Bagian ini akan menghubungkan section halaman user dengan item yang dia masukkan. Daya mulai dengan mengimport ```User``` ke ```models.py``` pada ```main```. Kemudian saya tambahkan line of code
+```
+user = models.ForeignKey(User, on_delete=models.CASCADE)
+```
+pada mode ```Item``` yang akan mrnghubungkan suatu item dengan satu user melalui hubungan dimana sebuah item pasti terasosiasikan dengan seorang user. Setelah itu, saya melakukan beberapa perubahan pada fungsi ```create_item``` saya di ```views.py``` dengan menambahkan 
+```
+item = form.save(commit=False)
+```
+Yang digunakan untuk mencegah agar Django tidak langsung menyimpan objek yang telah dibuat dari form langsung ke database agar objek bisa dimodifikasi lebih dulu. Kemudian, saya juga menambahkan
+```
+item.user = request.user
+```
+Yang akan menandakan bahwa suatu objek dimiliki pengguna yang sedang login.
+
+Saya lanjutkan dengan mengubah beberapa hal di fungsi ```show_main``` seperti ```item = Item.objects.filter(user=request.user)``` untuk menampilkan object ```Item``` yang sudah terasosiasi dengan pengguna yang sedan login. Serta kode ```'name': request.user.username``` yang akan menampilkan _username_ pengguna yang sedang login.
+
+Saya menyimpan semua perubahan dengan melakukan migrasi model dan checklist sudah terpenuhi.
+
+### :white_check_mark: Menampilkan detail informasi pengguna yang sedang _logged in_ seperti _username_ dan menerapkan ```cookies``` seperti ```last login``` pada halaman utama aplikasi.
+
+Untuk menjawab checklist ini, saya mulai dengan menambahkan ```datetime``` pada ```views.py```. Kemudian, saya akan menambahkan _cookie_ yang bernama ```last_login``` pada fungsi ```login_user``` untuk bisa melihat kapan terakhir kali pengguna melakukan _login_ dengan menambahkan beberapa line of code
+* ```login(request, user)``` = Akan melakukan login
+* ```response = HttpResponseRedirect(reverse("main:show_main"))``` yang akan membuat response
+* ```response.setcookie('last_login', str(datetime.datetime.now()))``` yang akan membuat _cookie_ _lastlogin_ dan menambahkannya ke rensponse.
+
+Kemudia saya menambahkan ```'last_login': request.COOKIES['last_login']``` pada ```context``` fungsi ```show_main``` untuk menambahkan informasdi cookie pada respon yang akan ditampilkan. Kemudian, saya modifikasi fungsi ```logout_user``` dengan menambahkan ```response.delete_cookie('last_login')``` untuk mengahpus _cookie_ kast_login saat pengguna logout. Saya tambahkan ```<h5>Sesi terakhir login: {{ last_login }}</h5>``` pada ```main.html``` untuk menampilkan data dari last_login.
+
+
 
 

@@ -1,26 +1,77 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap');
+    body {
+        font-family: 'Poppins', sans-serif;
+        background-color: #f0f8ff; /* Baby Blue / Soft Blue */
+        text-align: center;
+        margin: 0;
+        padding: 0;
+    }
+    h1, p {
+        color: #000080; /* Warna teks biru tua */
+        margin: 10px 0; /* Mengatur margin atas dan bawah */
+    }
+    h5 {
+        color: #000080; /* Warna teks biru tua */
+        margin: 5px 0; /* Mengatur margin atas dan bawah */ 
+    }
+    table {
+        width: 90%; /* Lebar tabel diperbesar */
+        margin: 20px auto; /* Margin disesuaikan */
+        border-collapse: separate; /* Menggunakan border-collapse: separate */
+        border-spacing: 0 15px; /* Jarak antar border diperbesar */
+    }
+    table, th, td {
+        border: 2px solid #87cefa; /* Warna border baby blue/soft blue */
+        padding: 10px;
+    }
+    th {
+        background-color: #87cefa; /* Warna latar header baby blue/soft blue */
+        color: white; /* Warna teks header putih */
+    }
+    td {
+        background-color: #f0f0f0; /* Warna latar sel abu-abu muda */
+    }
+    a {
+        text-decoration: none;
+        color: #000080; /* Warna teks biru tua untuk link */
+        padding: 10px;
+    }
+    button {
+        background-color: #000080; /* Warna latar button biru tua */
+        color: white; /* Warna teks button putih */
+        border: none;
+        padding: 10px 20px;
+        cursor: pointer;
+    }
+    button:hover {
+        background-color: #0000CD; /* Warna latar button saat hover */
+    }
+    p {
+        margin: 5px 0; /* Mengurangi margin */
+    }
+</style>
 
     <h1>Welcome to Glowventory Page</h1>
 
     <h5>Application Name:</h5>
     <p>{{application_name}}</p>
-
     <h5>Name:</h5>
     <p>{{name}}</p>
-
     <h5>Class:</h5>
     <p>{{class}}</p>
 
-    <table>
+    <table border="1">
         <tr>
             <th>Name</th>
             <th>Amount </th>
             <th>Price</th>
             <th>Description</th>
             <th>Category</th>
-            <th>Date Added</th>
+            <th></th>
         </tr>
     
         {% comment %} Berikut cara memperlihatkan data produk di bawah baris ini {% endcomment %}
@@ -32,17 +83,35 @@
                 <td>{{item.price}}</td>
                 <td>{{item.description}}</td>
                 <td>{{item.category}}</td>
-                <td>{{item.date_added}}</td>
+                <td>
+                    <a href='delete/{{item.id}}'>
+                        <button>
+                            Delete Item
+                        </button>
+                    </a>
+                </td>
             </tr>
         {% endfor %}
     </table>
     
     <br />
     
+    <p>Kamu telah menyimpan {{ data_count }} item pada aplikasi ini</p>
+
+    <h5>Sesi terakhir login: {{ last_login }}</h5>
+
     <a href="{% url 'main:create_item' %}">
         <button>
             Add New Item
         </button>
     </a>
+
+    <a href="{% url 'main:logout' %}">
+        <button>
+            Logout
+        </button>
+    </a>
+
+    
     
 {% endblock content %}
