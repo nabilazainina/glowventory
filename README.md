@@ -1,7 +1,7 @@
 # Welcome to Glowventory :revolving_hearts:
 
 ### Application Link
-[Click Here!](https://glowventory.adaptable.app/main/) to access Glowventory by Bella :smiley:
+[Click Here!](https://glowventory.adaptable.app/main/) or (http://localhost:8000/login/) to access Glowventory by Bella :smiley:
 
 
 #
@@ -254,19 +254,19 @@ Untuk menambahkan input ```form```, saya mulai dengan membuat **skeleton** yang 
 
 Saya mulai dengan membuat folder ```templates``` pada root folder dan membuat sebuah file HTML baru bernama ```base.html``` yang akan menjadi _template_ dasar. Setelah itu, saya lanjutkan dengan mengisi baris ```TEMPLATES``` pada ```settings.py``` pada subdirektori ```shopping_list``` untuk memastikan file ```base.html``` terdeteksi sebagai berkas _template_ dengan line of code
 
-```
+```py
 'DIRS': [BASE_DIR / 'templates']
 ```
 
 Lalu saya lanjutkan dengan mengganti kode di ```main.html```  pada subdirektori ```templates``` dalam direktori ```main``` untuk membuat ```base.html``` sebagai _template_ utama dengan kode.
 
-```
+```py
 {% extends 'base.html' %}
 ```
 
 Step berikutnya adalah saya mulai mengeksekusi form input data. Fungsi form ini adalah untuk menginput data barang pada aplikasi. Saya mulai dengan membuat file baru ```forms.py``` pada direktori ```main``` yang akan membuat struktur _form_ agar bisa menerima data produk baru sesuai dengan models, yakni menambahkan kode
 
-```
+```py
 from django.forms import ModelForm
 from main.models import Item
 
@@ -285,7 +285,7 @@ class ItemForm(ModelForm):
 * ```HTML``` :
     Setelah membuat form di checklist sebelumnya, saya lanjutkan dengan membuat function ```create_item``` pada ```views.py``` dengan mengimport ```ItemForm``` dari ```main.forms``` dan ```reverse``` dari ```django.urls``` pada file ```views.py```. 
 
-    ```
+    ```py
     def create_item(request):
         form = ItemForm(request.POST or None)
 
@@ -305,7 +305,7 @@ class ItemForm(ModelForm):
 
     Selanjutnya, masih di file yang sama, saya implementasikan fungsi pertama yang akan mengembalikan data dalam bentuk XML dengan menambah function ```show_xml```. Fungsi ```show_xml``` akan menyimpan keseluruhan hasil _query_ dari ```Item``` mereturn berupa ```HttpResponse``` yang berisi parameter data hasil _query_ yang diserialisasi menjadi XML dan parameter ```content_type="application/xml"``` .
 
-    ```
+    ```py
     def show_xml(request):
     data = Item.objects.all()
     return HttpResponse(serializers.serialize("xml", data), content_type="application/xml")
@@ -315,7 +315,7 @@ class ItemForm(ModelForm):
 
     Untuk mengembalikan data dalam bentu JSON, saya mulai dengan menambah menambah function ```show_json```. Fungsi ```show_json``` akan menerima parameter ```request``` dan menyimpan hasil _query_ dari seluruh data yang ada pada ```Item``` dan akan mereturn ```HttpResponse``` (yang sudah diimport) yang berisi hasil _query_ yang serialisasi menjadi JSON dan parameter ```content_type="application/json"```.
 
-    ```
+    ```py
     def show_json(request):
     data = Item.objects.all()
     return HttpResponse(serializers.serialize("json", data), content_type="application/json")
@@ -325,7 +325,7 @@ class ItemForm(ModelForm):
 
     Kedua metode ini akan mengembalikan data sesuai dengan index ID dari input item. Saya mulai dengan menambahkan dua fungsi baru yaitu ```def show_xml_by_id``` dan ```def show_json_by_id``` dengan parameter yang sama yaitu ```(request, id)```. 
     
-    ```
+    ```py
     def show_xml_by_id(request, id):
     data = Item.objects.filter(pk=id)
     return HttpResponse(serializers.serialize("xml", data), content_type="application/xml")
@@ -355,7 +355,7 @@ class ItemForm(ModelForm):
 * ```XML by ID``` dan ```JSON by ID``` :
 
     Setelah menyelesaikan kedua fungsi ```show_xml_by_id``` dan ```show_json_by_id```, saya lanjutkan dengan mengimport kedua fungsi tersebut ke ```urls.py``` di ```main``` dan menambahkan path
-    ```
+    ```py
     path('xml/<int:id>/', show_xml_by_id, name='show_xml_by_id'),
     path('json/<int:id>/', show_json_by_id, name='show_json_by_id'),
     ```
@@ -435,18 +435,27 @@ Setelah membuat function untuk views, saya lanjutkan dengan membuat sebuah berka
 
 ### :white_check_mark: Membuat dua akun pengguna dengan masing-masing tiga dummy data menggunakan model yang telah dibuat pada aplikasi sebelumnya untuk setiap akun di lokal
 
+Checklist ini saya mulai dengan menekan button ```Register Now``` dan memasukkan beberapa data ke dalamnya, sesuai dengan yang diminta yaitu username, pass, dan autentikasi pass. Akun yang saya buat adalah
+
+|   Nama Akun    |   Password     |
+| -------------  | -------------- |
+| nabila.zainina |  bisapbpletsgo |
+|    bella       |  halohalohalo  |
+
+Setelah itu, ketika masuk ke user yang saya inginkan, saya lanjutkan dengan menambahkan item dengan menekan tombol add item serta mengisi field di masing-masing tabel user. 
+
 ### :white_check_mark: Menghubungkan model ```Item``` dengan ```User```
 
 Bagian ini akan menghubungkan section halaman user dengan item yang dia masukkan. Daya mulai dengan mengimport ```User``` ke ```models.py``` pada ```main```. Kemudian saya tambahkan line of code
-```
+```py
 user = models.ForeignKey(User, on_delete=models.CASCADE)
 ```
 pada mode ```Item``` yang akan mrnghubungkan suatu item dengan satu user melalui hubungan dimana sebuah item pasti terasosiasikan dengan seorang user. Setelah itu, saya melakukan beberapa perubahan pada fungsi ```create_item``` saya di ```views.py``` dengan menambahkan 
-```
+```py
 item = form.save(commit=False)
 ```
 Yang digunakan untuk mencegah agar Django tidak langsung menyimpan objek yang telah dibuat dari form langsung ke database agar objek bisa dimodifikasi lebih dulu. Kemudian, saya juga menambahkan
-```
+```py
 item.user = request.user
 ```
 Yang akan menandakan bahwa suatu objek dimiliki pengguna yang sedang login.
