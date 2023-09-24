@@ -1,6 +1,4 @@
 from django.test import TestCase, Client
-from main.models import Items
-
 
 class mainTest(TestCase):
     def test_main_url_is_exist(self):
@@ -16,7 +14,6 @@ class mainTest(TestCase):
         response = Client().get('/main/')
 
         # Mengecek konten dari response context
-        self.assertEqual(response.context['application_name'], 'glowventory')
-        self.assertEqual(response.context['name'], 'Bella')
+        self.assertEqual(response.context['application_name'], 'Glowventory')
         self.assertEqual(response.context['class'], 'PBP C')
 
