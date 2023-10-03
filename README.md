@@ -474,5 +474,220 @@ Untuk menjawab checklist ini, saya mulai dengan menambahkan ```datetime``` pada 
 Kemudia saya menambahkan ```'last_login': request.COOKIES['last_login']``` pada ```context``` fungsi ```show_main``` untuk menambahkan informasdi cookie pada respon yang akan ditampilkan. Kemudian, saya modifikasi fungsi ```logout_user``` dengan menambahkan ```response.delete_cookie('last_login')``` untuk mengahpus _cookie_ kast_login saat pengguna logout. Saya tambahkan ```<h5>Sesi terakhir login: {{ last_login }}</h5>``` pada ```main.html``` untuk menampilkan data dari last_login.
 
 
+### :white_check_mark: Jelaskan manfaat setiap _element selector_ dan kapan waktu yang tepat untuk menggunakannya
 
+Selector elemen pada CSS adalah cara untuk menargetkan dan memilih elemen HTML tertentu yang ingin di-styling. Selector ini memungkinkan Anda mendefinisikan gaya atau style CSS yang akan diterapkan pada elemen-elemen tersebut. Berikut adalah beberapa jenis selector elemen yang umum digunakan dalam CSS:
 
+**Selector Elemen (Tag Name)** 
+* Memilih elemen berdasarkan tag name (misalnya, <div>, <p>, <h1>) bermanfaat apabila ingin menerapkan gaya umum untuk sekelompok elemen dengan tag yang sama.
+
+**Selector ID (#)**
+* Memilih elemen berdasarkan ID unik, bermanfaat apabila ingin menerapkan gaya khusus untuk satu elemen tertentu yang memiliki ID unik.
+
+**Selector Kelas (.kelas)**
+* Memilih elemen berdasarkan kelas yang diberikan, berguna apabila digunakan ketika ingin menerapkan gaya yang sama pada sekelompok elemen yang memiliki kelas yang sama
+
+**Selector Kombinasi (,)**
+* Memilih beberapa elemen dengan gaya yang sama, bermanfaat apabila ingin menerapkan gaya yang sama pada beberapa elemen dengan tag name atau kelas berbeda
+
+**Selector Universal (*)**
+* Memilih semua elemen dalam dokumen dan dapat digunakan jika ingin menggunakan satu gaya pada keseluruhan halaman web.
+
+## :white_check_mark: Jelaskan HTML5 Tag yang kamu ketahui
+
+<nav>:
+Menyediakan navigasi untuk halaman web.
+
+<main>:
+Mendefinisikan konten utama dari halaman web.
+
+<section>:
+Mengelompokkan konten terkait dalam suatu bagian.
+
+<p>:
+Mendefinisikan sebuah paragraf teks.
+
+<a>:
+Membuat tautan (link) ke halaman web atau sumber daya lainnya.
+
+## :white_check_mark: Jelaskan perbedaan antara _margin_ dan _padding_
+
+1. **Margin (Margin):**
+   Margin adalah area di sekitar elemen, yang mencakup ruang antara elemen tersebut dan elemen lain di sekitarnya. Margin tidak memiliki warna latar belakang dan tidak dapat diisi dengan konten. Margin digunakan untuk mengatur jarak antara elemen dengan elemen lain di sekitarnya.
+
+2. **Padding (Padding):**
+   Padding adalah ruang di antara batas elemen dan kontennya. Padding berada di dalam elemen dan memberikan jarak antara konten elemen dan batas elemen. Padding dapat memiliki warna latar belakang dan akan mempengaruhi tampilan elemen tersebut.
+
+Jadi, sementara margin mengendalikan jarak antara elemen dan elemen lain di sekitarnya, padding mengendalikan jarak antara konten elemen dan batas elemen itu sendiri. Dengan kata lain, properti margin mengontrol ruang di luar elemen, sedangkan properti padding mengontrol ruang di dalam elemen.
+
+## :white_check_mark: Jelaskan perbedaan antara framework CSS Tailwind dan Bootstrap. Kapan sebaiknya kita menggunakan Bootstrap daripada Tailwind, dan sebaliknya?
+
+Bootstrap dan Tailwind CSS adalah dua kerangka kerja (framework) yang populer untuk membangun tata letak dan antarmuka pengguna pada aplikasi web. Berikut adalah perbedaan dan ringkasan dari keduanya:
+
+### Bootstrap:
+- **Deskripsi**: Bootstrap adalah salah satu kerangka kerja paling populer untuk mengembangkan aplikasi web responsif dan mobile-first.
+- **Karakteristik Utama**:
+  - Menyediakan tema dan template siap pakai.
+  - Memiliki kelas-kelas bawaan yang mudah digunakan dan didesain untuk membangun antarmuka pengguna.
+  - Aplikasi yang dibuat dengan Bootstrap cenderung memiliki tata letak yang mirip karena menggunakan template bawaan.
+  - Sudah ada sejak lama dan dikenal efisien dalam responsivitasnya, menghemat waktu pengembangan.
+- **Ukuran File**: Memerlukan ukuran file yang cukup besar.
+
+### Tailwind CSS:
+
+- **Deskripsi**: Tailwind CSS adalah kerangka kerja CSS yang semakin populer untuk menciptakan antarmuka pengguna yang dioptimalkan dan fleksibel.
+- **Karakteristik Utama**:
+  - Menggunakan kelas utilitas yang memungkinkan pengembang membangun antarmuka pengguna yang unik dan sesuai kebutuhan.
+  - Tidak memiliki templat atau tata letak bawaan, memungkinkan fleksibilitas tinggi dalam desain.
+  - Masih merupakan kerangka kerja yang terus berkembang dan memperbarui fungsionalitasnya.
+- **Ukuran File**: Memerlukan ukuran file yang lebih kecil.
+
+### Ringkasan:
+-Bootstrap menyediakan template dan kelas bawaan untuk membangun antarmuka dengan cepat dan relatif seragam sementara Tailwind CSS memungkinkan pembuatan antarmuka yang unik dengan menggunakan kelas utilitas tanpa templat bawaan.Bootstrap sendiri telah ada lebih lama dan efisien dalam responsivitas, sementara Tailwind CSS masih dalam perkembangan dan memiliki ukuran file yang lebih kecil.
+
+## :white_check_mark: Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial).
+
+Saya memulai pekerjaan saya dengan membuat Bootstrap ke aplikasi melalui base.html sesuai ketentuan. Kemudian, saya lanjutkan dengan menambahkan vitur edit pada aplikasi.
+
+Fitur edit saya lakukan dengan menambahkan fungsi ```def edit_product(request, id)``` ke ```views.py```. Kemudian saya tambahkan berkas ```edit_product.html``` pada ```main/templates``` sesuai dengan ketentuan format edit product yang saya inginkan.Selanjutnya saya tambahkan pasth url ke   ```urlpatterns``` untuk mengakses fungsi yang sudah diimpor. Selanjutnya, saya tambahkan button baru di ```main.html``` untuk mengedit product, dan memastikan url pattern tepat.
+
+Step berikutnya, saya mulai melakukan edit dan mendesign web saya menggunakan CSS. Pertama, saya tambahkan navbar pada main.html saya. Setelah itu, saya tambahkan CSS code dengan ```<style>``` yang akan menampung keseluruhan design saya. Untuk mendesign saya lakukan dengan memilih element selector yang sekiranya saya ingin design bersama, berikut contohnya:
+
+```
+   <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f0f8ff; /* Baby Blue / Soft Blue */
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        nav.navbar {
+            width: 100%;
+            font-size: 18px;
+            color: white;
+            background-color: #000080; /* Dark Blue */
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 10px;
+            text-align: center;
+        }
+
+        nav.navbar a {
+            text-align: left;
+            color: white;
+            margin-left: 20px;
+            font-weight: bold;
+        }
+
+        .user-info.welcome-text {
+            font-family: Verdana, sans-serif; /* Change font to Verdana */
+            font-size: 12px; /* Adjusted font size */
+            margin-top: 3px; /* Adjusted margin */
+            align-items: baseline;
+        }
+
+        .logout-button {
+            display: flex;
+            align-items: center;
+            margin-right: 20px; /* Adjusted margin */
+        }
+        
+        .logout-button i {
+            margin-right: 5px; /* Adjusted margin */
+        }
+
+        .container {
+            padding: 20px;
+            text-align: center;
+        }
+
+        h1 {
+            color: #000080; /* Dark Blue */
+            padding: 20px 0;
+        }
+
+        h4{
+            color: #333; /* Dark Gray */
+            font-size: 13px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            text-align: center;
+            border: 2px solid #004d40; /* Darker Soft Blue */
+        }
+
+        th, td {
+            border: 1px solid #004d40; /* Darker Soft Blue */
+            padding: 15px;
+            text-align: center;
+            background-color: #e0f7fa; /* Light Blue */
+        }
+
+        td {
+            font-size: 13px;
+        }
+
+        th {
+            background-color: #004d40; /* Darker Soft Blue */
+            color: white;
+        }
+
+        a.button {
+            text-decoration: none;
+            color: white;
+            background-color: #00838f; /* Soft Blue */
+            padding: 12px 24px;
+            border-radius: 5px;
+            font-size: 14px;
+            transition: background-color 0.3s;
+            margin: 10px 10px 0; /* Adjusted margin */
+            display: inline-block;
+        }
+
+        a.button:hover {
+            background-color: #004d40; /* Darker Soft Blue on hover */
+        }
+
+        p {
+            margin: 10px 0 5px; /* Adjusted margin */
+            font-size: 12px; /* Reduced font size for item count */
+            padding-bottom: 2%;
+            padding-top: 5%;
+        }
+
+        .last-login {
+            font-size: 10px; /* Reduced font size for last login */
+            color: #000080; /* Dark Blue */
+            margin-top: 10px; /* Adjusted margin top */
+            padding-top: 8%;
+        }
+
+        .container {
+            padding: 20px;
+            text-align: center;
+            margin-bottom: 50px; /* Tambahkan margin bottom yang cukup besar */
+        }
+
+        .footer {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background-color: #f0f0f0;
+            padding: 10px;
+            padding-left: 5%;
+            text-align: left;
+            text-decoration: solid;
+            z-index: 999; /* Atur z-index untuk memastikan footer muncul di atas konten lain */
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        }
+    </style>
+```
+
+Implementasi tersebut saya lakukan di file-file lainnya, tergantung dengan design yang saya inginkan di laman web saya. 

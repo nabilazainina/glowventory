@@ -4,28 +4,29 @@
     <title>Register</title>
 {% endblock meta %}
 
-{% block content %} 
+{% block content %}
 <style>
-    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap');
     body {
-        font-family: 'Poppins', sans-serif;
+        font-family: 'Montserrat', sans-serif;
         background-color: #e0f7fa; /* Soft Blue */
-        text-align: center;
+        text-align: left;
         margin: 0;
-        padding: 0;
+        padding: 20px; /* Add some padding to create space around the content */
+        font-size: 12px;
     }
     h1, h5, p {
         color: #00838f; /* Soft Blue */
         margin: 5px 0; /* Mengatur margin atas dan bawah */
+        text-align: center;
     }
     table {
-        width: 80%; /* Lebar tabel diperbesar */
-        margin: 10px auto; /* Margin disesuaikan */
+        width: 100%; /* Lebar tabel 100% */
         border-collapse: separate; /* Menggunakan border-collapse: separate */
         border-spacing: 0 15px; /* Jarak antar border diperbesar */
     }
     table, th, td {
-        border: 2px solid #81c784; /* Soft Green */
+        border: none; /* Menghapus border */
         padding: 10px;
     }
     th {
@@ -39,44 +40,49 @@
         text-decoration: none;
         color: #00838f; /* Soft Blue */
     }
-    button {
-        background-color: #00838f; /* Soft Blue */
-        color: white; /* Warna teks button putih */
+    .login {
+        padding: 20px;
+        border-radius: 10px;
+        background-color: #fff; /* White */
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Shadow effect */
+        margin: 50px auto; /* Centered */
+        max-width: 500px; /* Increase the max width of the container */
+        background-color: #f9f9f9; /* Light Gray for the container */
+    }
+    .login table input {
+        width: 100%; /* Text field 100% width */
+        box-sizing: border-box; /* Include padding and border in the width */
+    }
+    .login button {
+        background-color: #f0f0f0; /* Light Gray */
+        color: #333; /* Dark Gray */
         border: none;
         padding: 10px 20px;
         cursor: pointer;
+        width: 100%; /* Button 100% width */
+        box-sizing: border-box; /* Include padding and border in the width */
     }
-    button:hover {
-        background-color: #004d40; /* Darker Soft Blue on hover */
+    .login button:hover {
+        background-color: #d0d0d0; /* Slightly darker gray on hover */
     }
-    p {
-        margin: 5px 0; /* Mengurangi margin */
-    }
-</style> 
+</style>
 
-<div class = "login">
-    
-    <h1>Register</h1>  
-
-        <form method="POST" >  
-            {% csrf_token %}  
-            <table>  
-                {{ form.as_table }}  
-                <tr>  
-                    <td></td>
-                    <td><input type="submit" name="submit" value="Daftar"/></td>  
-                </tr>  
-            </table>  
-        </form>
-
-    {% if messages %}  
-        <ul>   
-            {% for message in messages %}  
-                <li>{{ message }}</li>  
-                {% endfor %}  
-        </ul>   
+<div class="login">
+    <h1>Register</h1>
+    <form method="POST">
+        {% csrf_token %}
+        <table>
+            {{ form.as_table }}
+        </table>
+        <button class="btn login_btn" type="submit">Daftar</button>
+    </form>
+    {% if messages %}
+        <ul>
+            {% for message in messages %}
+                <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
     {% endif %}
-
-</div>  
+</div>
 
 {% endblock content %}

@@ -1,117 +1,212 @@
-{% extends 'base.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-hQ2yXBUkth9eYUMA+wF33GSLxMyfcrCyP6oJ4MRmF87DfuYng/wjszpn7rfXtDpAyKO8rTRFlBKuxZGiK7oJ6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f0f8ff; /* Baby Blue / Soft Blue */
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
 
-{% block content %}
-<style>
-    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap');
-    body {
-        font-family: 'Poppins', sans-serif;
-        background-color: #f0f8ff; /* Baby Blue / Soft Blue */
-        text-align: center;
-        margin: 0;
-        padding: 0;
-    }
-    h1, p {
-        color: #000080; /* Warna teks biru tua */
-        margin: 10px 0; /* Mengatur margin atas dan bawah */
-    }
-    h5 {
-        color: #000080; /* Warna teks biru tua */
-        margin: 5px 0; /* Mengatur margin atas dan bawah */ 
-    }
-    table {
-        width: 90%; /* Lebar tabel diperbesar */
-        margin: 20px auto; /* Margin disesuaikan */
-        border-collapse: separate; /* Menggunakan border-collapse: separate */
-        border-spacing: 0 15px; /* Jarak antar border diperbesar */
-    }
-    table, th, td {
-        border: 2px solid #87cefa; /* Warna border baby blue/soft blue */
-        padding: 10px;
-    }
-    th {
-        background-color: #87cefa; /* Warna latar header baby blue/soft blue */
-        color: white; /* Warna teks header putih */
-    }
-    td {
-        background-color: #f0f0f0; /* Warna latar sel abu-abu muda */
-    }
-    a {
-        text-decoration: none;
-        color: #000080; /* Warna teks biru tua untuk link */
-        padding: 10px;
-    }
-    button {
-        background-color: #000080; /* Warna latar button biru tua */
-        color: white; /* Warna teks button putih */
-        border: none;
-        padding: 10px 20px;
-        cursor: pointer;
-    }
-    button:hover {
-        background-color: #0000CD; /* Warna latar button saat hover */
-    }
-    p {
-        margin: 5px 0; /* Mengurangi margin */
-    }
-</style>
+        nav.navbar {
+            width: 100%;
+            font-size: 18px;
+            color: white;
+            background-color: #000080; /* Dark Blue */
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 10px;
+            text-align: center;
+        }
 
-    <h1>Welcome to Glowventory Page</h1>
+        nav.navbar a {
+            text-align: left;
+            color: white;
+            margin-left: 20px;
+            font-weight: bold;
+        }
 
-    <h5>Application Name:</h5>
-    <p>{{application_name}}</p>
-    <h5>Name:</h5>
-    <p>{{name}}</p>
-    <h5>Class:</h5>
-    <p>{{class}}</p>
+        .user-info.welcome-text {
+            font-family: Verdana, sans-serif; /* Change font to Verdana */
+            font-size: 12px; /* Adjusted font size */
+            margin-top: 3px; /* Adjusted margin */
+            align-items: baseline;
+        }
 
-    <table border="1">
-        <tr>
-            <th>Name</th>
-            <th>Amount </th>
-            <th>Price</th>
-            <th>Description</th>
-            <th>Category</th>
-            <th></th>
-        </tr>
-    
-        {% comment %} Berikut cara memperlihatkan data produk di bawah baris ini {% endcomment %}
-    
-        {% for item in items %}
-            <tr>
-                <td>{{item.name}}</td>
-                <td>{{item.amount}}</td>
-                <td>{{item.price}}</td>
-                <td>{{item.description}}</td>
-                <td>{{item.category}}</td>
-                <td>
-                    <a href='delete/{{item.id}}'>
-                        <button>
-                            Delete Item
-                        </button>
-                    </a>
-                </td>
-            </tr>
-        {% endfor %}
-    </table>
-    
-    <br />
-    
-    <p>Kamu telah menyimpan {{ data_count }} item pada aplikasi ini</p>
+        .logout-button {
+            display: flex;
+            align-items: center;
+            margin-right: 20px; /* Adjusted margin */
+        }
+        
+        .logout-button i {
+            margin-right: 5px; /* Adjusted margin */
+        }
 
-    <h5>Sesi terakhir login: {{ last_login }}</h5>
+        .container {
+            padding: 20px;
+            text-align: center;
+        }
 
-    <a href="{% url 'main:create_item' %}">
-        <button>
+        h1 {
+            color: #000080; /* Dark Blue */
+            padding: 20px 0;
+        }
+
+        h4{
+            color: #333; /* Dark Gray */
+            font-size: 13px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            text-align: center;
+            border: 2px solid #004d40; /* Darker Soft Blue */
+        }
+
+        th, td {
+            border: 1px solid #004d40; /* Darker Soft Blue */
+            padding: 15px;
+            text-align: center;
+            background-color: #e0f7fa; /* Light Blue */
+        }
+
+        td {
+            font-size: 13px;
+        }
+
+        th {
+            background-color: #004d40; /* Darker Soft Blue */
+            color: white;
+        }
+
+        a.button {
+            text-decoration: none;
+            color: white;
+            background-color: #00838f; /* Soft Blue */
+            padding: 12px 24px;
+            border-radius: 5px;
+            font-size: 14px;
+            transition: background-color 0.3s;
+            margin: 10px 10px 0; /* Adjusted margin */
+            display: inline-block;
+        }
+
+        a.button:hover {
+            background-color: #004d40; /* Darker Soft Blue on hover */
+        }
+
+        p {
+            margin: 10px 0 5px; /* Adjusted margin */
+            font-size: 12px; /* Reduced font size for item count */
+            padding-bottom: 2%;
+            padding-top: 5%;
+        }
+
+        .last-login {
+            font-size: 10px; /* Reduced font size for last login */
+            color: #000080; /* Dark Blue */
+            margin-top: 10px; /* Adjusted margin top */
+            padding-top: 8%;
+        }
+
+        .container {
+            padding: 20px;
+            text-align: center;
+            margin-bottom: 50px; /* Tambahkan margin bottom yang cukup besar */
+        }
+
+        .footer {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background-color: #f0f0f0;
+            padding: 10px;
+            padding-left: 5%;
+            text-align: left;
+            text-decoration: solid;
+            z-index: 999; /* Atur z-index untuk memastikan footer muncul di atas konten lain */
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        }
+
+
+
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <a href="#"><b>GLOWVENTORY PAGE</b></a>
+        <div class="user-info welcome-text">
+            Welcome &nbsp{{ name }}
+        </div>
+        <a class="logout-button" href="{% url 'main:logout' %}">
+            <i class="fas fa-sign-out-alt"></i> Logout
+        </a>
+    </nav>
+
+    <div class="container">
+        <h1>Welcome to Glowventory Page</h1>
+        <h4>Add the best product for you and your glowing skin</h4>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Amount</th>
+                    <th>Price</th>
+                    <th>Description</th>
+                    <th>Category</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in items %}
+                    <tr>
+                        <td>{{item.name}}</td>
+                        <td>{{item.amount}}</td>
+                        <td>{{item.price}}</td>
+                        <td>{{item.description}}</td>
+                        <td>{{item.category}}</td>
+                        <td>
+                            <a href='delete/{{item.id}}' class="button">
+                                Delete Item
+                            </a>
+                        </td>
+                        <td>
+                            <a href="{% url 'main:edit_item' item.pk %}" class="button">
+                                Edit
+                            </a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <p>You have {{ data_count }} items in this application</p>
+        
+        <a href="{% url 'main:create_item' %}" class="button">
             Add New Item
-        </button>
-    </a>
-
-    <a href="{% url 'main:logout' %}">
-        <button>
+        </a>
+        
+        <a href="{% url 'main:logout' %}" class="button">
             Logout
-        </button>
-    </a>
+        </a>
+    </div>
 
-    
-    
-{% endblock content %}
+    <div class="footer">
+        Glowventory by Bella | Last login: {{ last_login }}
+    </div>
+
+</body>
+</html>
