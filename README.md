@@ -690,4 +690,4 @@ Step berikutnya, saya mulai melakukan edit dan mendesign web saya menggunakan CS
     </style>
 ```
 
-Implementasi tersebut saya lakukan di file-file lainnya, tergantung dengan design yang saya inginkan di laman web saya. 
+Implementasi tersebut saya lakukan di file-file lainnya, tergantung dengan design yang saya inginkan di laman web saya, baik di halaman main, register, login. Saya juga mendesign kembali navbar serta halaman edit item.
