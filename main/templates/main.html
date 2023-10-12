@@ -1,9 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'base.html' %}
+
+{% block content %}
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap">
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-hQ2yXBUkth9eYUMA+wF33GSLxMyfcrCyP6oJ4MRmF87DfuYng/wjszpn7rfXtDpAyKO8rTRFlBKuxZGiK7oJ6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <style>
         body {
@@ -52,7 +54,7 @@
         }
 
         .container {
-            padding: 20px;
+            padding: 8px;
             text-align: center;
         }
 
@@ -67,27 +69,30 @@
         }
 
         table {
-            width: 100%;
-            border-collapse: collapse;
+            width: 90%;
+            max-width: 100%;
+            margin: 0 auto;
             margin-top: 20px;
             text-align: center;
-            border: 2px solid #004d40; /* Darker Soft Blue */
+            border: 2px solid #ccc; /* Border color: Light Gray */
+            background-color: white; /* Background color: White */
         }
 
         th, td {
-            border: 1px solid #004d40; /* Darker Soft Blue */
-            padding: 15px;
+            border: 1px solid #ccc; /* Border color: Light Gray */
+            padding: 15px; /* Adjusted padding for cells */
             text-align: center;
-            background-color: #e0f7fa; /* Light Blue */
-        }
-
-        td {
-            font-size: 13px;
+            background-color: #f9f9f9; /* Background color: Very Light Gray */
+            color: #333; /* Text color: Dark Gray */
         }
 
         th {
-            background-color: #004d40; /* Darker Soft Blue */
-            color: white;
+            background-color: #ccc; /* Header background color: Light Gray */
+            color: #333; /* Header text color: Dark Gray */
+        }
+
+        td {
+            font-size: 14px; /* Adjusted font size for cells */
         }
 
         a.button {
@@ -124,10 +129,10 @@
             padding: 20px;
             text-align: center;
             margin-bottom: 50px; /* Tambahkan margin bottom yang cukup besar */
+            margin-top: 50px;
         }
 
         .footer {
-            position: fixed;
             bottom: 0;
             width: 100%;
             background-color: #f0f0f0;
@@ -136,11 +141,89 @@
             text-align: left;
             text-decoration: solid;
             z-index: 999; /* Atur z-index untuk memastikan footer muncul di atas konten lain */
-            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            font-family: 'Lato';
         }
+
+        .bg-1 {
+            background-color: #7487cf; /* Green */
+            color: #ffffff;
+        }
+        .bg-2 {
+            background-color: #9db2df; /* Dark Blue */
+            color: #14131f;
+            padding: 10px;
+            margin-bottom: 3px;
+            font-family: 'Lato';
+            font-weight: 200;
+            font-style: inherit;
+            font: 300;
+        }
+        .bg-3 {
+            background-color: #ffffff; /* White */
+            color: #555555;
+        }
+
+        .container-fluid.bg-2 {
+            padding: 40px; /* Adjusted padding */
+        }
+
+        .container-fluid.bg-2 h3 {
+            font-size: 24px; /* Adjusted font size */
+            font-family: 'Poppins', sans-serif;
+            color: #14131f;
+        }
+
+        .container-fluid.bg-2 p {
+            font-size: 18px; /* Adjusted font size */
+            color: #333; /* Adjusted text color */
+            margin-bottom: 20px; /* Adjusted margin */
+        }
+
+        /* Untuk tombol "Delete" */
+        .btn-danger {
+            background-color: #9db2df; /* Warna yang setara dengan warna pada tabel */
+            color: #14131f; /* Warna teks agar kontras dengan latar belakang */
+        }
+
+        .btn-danger:hover {
+            background-color: #7487cf; /* Warna saat dihover */
+        }
+
+        /* Untuk tombol "Add Item" dan "Edit Item" */
+        .btn-primary {
+            background-color: #9db2df; /* Warna yang setara dengan warna pada tabel */
+            color: #14131f; /* Warna teks agar kontras dengan latar belakang */
+        }
+
+        .btn-primary:hover {
+            background-color: #7487cf; /* Warna saat dihover */
+        }
+
+        h4{
+            padding: 5px;
+        }
+        .card-item {
+            width: 250px; /* Atur lebar kartu */
+            height: 300px; /* Atur tinggi kartu */
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px; /* Tambahkan margin agar terlihat jarak antar kartu */
+            margin-top: 50px;
+        }
+
+        .card-item h2 {
+            font-size: 18px;
+            margin-bottom: 10px;
+            color: #000080;
+        }
+
     </style>
     
 </head>
+
+
 <body>
     <nav class="navbar">
         <a href="#"><b>GLOWVENTORY PAGE</b></a>
@@ -151,60 +234,148 @@
             <i class="fas fa-sign-out-alt"></i> Logout
         </a>
     </nav>
-
+    
     <div class="container">
         <h1>Welcome to Glowventory Page</h1>
+    </div>
+    
+    <div class="container-fluid bg-2 text-center">
+        <h3>About Us</h3>
+        <p>Glowventory  is a powerful and user-friendly platform designed to assist skincare enthusiasts in organizing and managing their skincare products.
+            The application is tailored specifically for skincare products, allowing users to keep track of their skincare products and makeup products with its detail.
+            The application provides a comprehensive product catalog where users can input details about each skincare or makeup product they own. Users can store information such as 
+            product name, amount, price, description of the producet and categories.
+        </p>
+
+    </div> 
+
+    <div class="container">
         <h4>Add the best product for you and your glowing skin</h4>
-
-        <table>
-            <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Amount</th>
-                    <th>Price</th>
-                    <th>Description</th>
-                    <th>Category</th>
-                    <th></th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for item in items %}
-                    <tr>
-                        <td>{{item.name}}</td>
-                        <td>{{item.amount}}</td>
-                        <td>{{item.price}}</td>
-                        <td>{{item.description}}</td>
-                        <td>{{item.category}}</td>
-                        <td>
-                            <a href='delete/{{item.id}}' class="button">
-                                Delete Item
-                            </a>
-                        </td>
-                        <td>
-                            <a href="{% url 'main:edit_item' item.pk %}" class="button">
-                                Edit
-                            </a>
-                        </td>
-                    </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-
+        <div class="card-container" id="product_table"></div>
+    
         <p>You have {{ data_count }} items in this application</p>
-        
-        <a href="{% url 'main:create_item' %}" class="button">
-            Add New Item
-        </a>
-        
-        <a href="{% url 'main:logout' %}" class="button">
-            Logout
-        </a>
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Add Item by AJAX</button>
     </div>
 
+    
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Add New Item</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="form" onsubmit="return false;">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            <label for="name" class="col-form-label">Name:</label>
+                            <input type="text" class="form-control" id="name" name="name"></input>
+                        </div>
+                        <div class="mb-3">
+                            <label for="amount" class="col-form-label">Amount:</label>
+                            <input type="text" class="form-control" id="amount" name="amount"></input>
+                        </div>
+                        <div class="mb-3">
+                            <label for="price" class="col-form-label">Price:</label>
+                            <input type="number" class="form-control" id="price" name="price"></input>
+                        </div>
+                        <div class="mb-3">
+                            <label for="description" class="col-form-label">Description:</label>
+                            <textarea class="form-control" id="description" name="description"></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="category" class="col-form-label">Category:</label>
+                            <input type="text" class="form-control" id="category" name="category"></input>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="button_add" data-bs-dismiss="modal">Add Item</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
     <div class="footer">
         Glowventory by Bella | Last login: {{ last_login }}
     </div>
 
+    <script>
+        async function getProducts() {
+            return fetch("{% url 'main:get_product_json' %}").then((res) => res.json())
+        }
+    
+        async function refreshProducts() {
+            const productTable = document.getElementById("product_table");
+            productTable.innerHTML = "";
+
+            const products = await getProducts();
+            let htmlString = "<div class='row'>";  // Start a new row
+
+            products.forEach((item, index) => {
+                if (index % 3 === 0 && index !== 0) {
+                    htmlString += "</div><div class='row'>";  // Close previous row and start a new row for every 3 cards
+                }
+
+                htmlString += `
+                    <div class="col-md-4">
+                        <div class="card-item">
+                            <div class="card mx-auto p-3" style="width: 18rem;">
+                                <div class="card-body">
+                                    <h2 class="card-title">${item.fields.name}</h2>
+                                    <p class="card-text">Amount: ${item.fields.amount}</p>
+                                    <p class="card-text">Price: ${item.fields.price}</p>
+                                    <p class="card-text">${item.fields.description}</p>
+                                    <p class="card-text">Category: ${item.fields.category}</p>
+                                    <a style="justify-content: baseline;" href='edit-item/${item.pk}' class="btn btn-outline-warning" onclick="editItem(${item.pk})">Edit</a>
+                                    <button style="justify-content: baseline;" class="btn btn-outline-danger" onclick="deleteProduct(${item.pk})">Delete</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>`;
+            });
+
+            htmlString += "</div>";  // Close the last row
+            productTable.innerHTML = htmlString;
+        }
+
+    
+        function addProduct() {
+            fetch("{% url 'main:add_product_ajax' %}", {
+                method: "POST",
+                body: new FormData(document.querySelector('#form'))
+            }).then(refreshProducts)
+    
+            document.getElementById("form").reset()
+            return false
+        }
+
+        function editProduct(productId) {
+            fetch(`{% url 'main:edit_item' 0 %}${productId}/`, {
+            method: "POST",
+            body: new FormData(document.querySelector('#form'))
+        }).then(refreshProducts)
+
+        document.getElementById("form").reset()
+        return false
+        }
+
+        function deleteProduct(productId) {
+            fetch(`{% url 'main:delete' 0 %}`.replace("0", productId), {
+                method: "POST",
+                body: new FormData(document.querySelector('#form'))
+            }).then(refreshProducts)
+
+            document.getElementById("form").reset()
+            return false
+        }
+
+        refreshProducts()
+        document.getElementById("button_add").onclick = addProduct
+    </script>
+    
 </body>
 </html>
+{% endblock content %}

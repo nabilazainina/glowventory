@@ -473,13 +473,15 @@ Untuk menjawab checklist ini, saya mulai dengan menambahkan ```datetime``` pada 
 
 Kemudia saya menambahkan ```'last_login': request.COOKIES['last_login']``` pada ```context``` fungsi ```show_main``` untuk menambahkan informasdi cookie pada respon yang akan ditampilkan. Kemudian, saya modifikasi fungsi ```logout_user``` dengan menambahkan ```response.delete_cookie('last_login')``` untuk mengahpus _cookie_ kast_login saat pengguna logout. Saya tambahkan ```<h5>Sesi terakhir login: {{ last_login }}</h5>``` pada ```main.html``` untuk menampilkan data dari last_login.
 
+#
+# TUGAS 5
 
 ### :white_check_mark: Jelaskan manfaat setiap _element selector_ dan kapan waktu yang tepat untuk menggunakannya
 
 Selector elemen pada CSS adalah cara untuk menargetkan dan memilih elemen HTML tertentu yang ingin di-styling. Selector ini memungkinkan Anda mendefinisikan gaya atau style CSS yang akan diterapkan pada elemen-elemen tersebut. Berikut adalah beberapa jenis selector elemen yang umum digunakan dalam CSS:
 
 **Selector Elemen (Tag Name)** 
-* Memilih elemen berdasarkan tag name (misalnya, <div>, <p>, <h1>) bermanfaat apabila ingin menerapkan gaya umum untuk sekelompok elemen dengan tag yang sama.
+* Memilih elemen berdasarkan tag name (misalnya, div, p, h1) bermanfaat apabila ingin menerapkan gaya umum untuk sekelompok elemen dengan tag yang sama.
 
 **Selector ID (#)**
 * Memilih elemen berdasarkan ID unik, bermanfaat apabila ingin menerapkan gaya khusus untuk satu elemen tertentu yang memiliki ID unik.
@@ -691,3 +693,140 @@ Step berikutnya, saya mulai melakukan edit dan mendesign web saya menggunakan CS
 ```
 
 Implementasi tersebut saya lakukan di file-file lainnya, tergantung dengan design yang saya inginkan di laman web saya, baik di halaman main, register, login. Saya juga mendesign kembali navbar serta halaman edit item.
+
+#
+# TUGAS 6
+
+## Jelaskan perbedaan antara asynchronous programming dengan synchronous programming
+
+* **Synchronous Programming**
+Dalam pemrograman sinkron, tugas-tugas dieksekusi secara berurutan, satu per satu. Program menunggu tugas saat ini selesai sebelum melanjutkan ke tugas selanjutnya
+
+* **Asynchronous Programming**
+Asynchronous programming merupakan sebuah pendekatan pemrograman yang tidak terikat pada input output (I/O)  protokol. Dalam pemrograman asinkron, tugas-tugas dapat dieksekusi secara bersamaan tanpa harus menunggu tugas sebelumnya selesai. Ini memungkinkan program untuk melakukan beberapa operasi secara bersamaan.
+
+## Dalam penerapan JavaScript dan AJAX, terdapat penerapan paradigma event-driven programming. Jelaskan maksud dari paradigma tersebut dan sebutkan salah satu contoh penerapannya pada tugas ini
+
+Paradigma event-driven adalah pendekatan di mana program merespons kejadian atau "event" yang terjadi pada suatu waktu tertentu, seperti klik mouse, pengisian formulir, atau permintaan AJAX. Program akan merespons event ini dengan menjalankan fungsi atau tindakan yang telah ditentukan sebelumnya.
+
+Dalam penggunaan AJAX di program, event-driven programming dapat dilihat ketika user ingin menambahkan item ke inventory. Ketika user menekan tombol "Add Item by AJAX", program akan langsung berpindah ke event berikutnya yaitu form pengisian barang.
+
+## Jelaskan penerapan asynchronous programming pada AJAX
+
+Asynchronous programming adalah paradigma pemrograman yang memungkinkan operasi untuk dilakukan secara bersamaan atau tanpa menghalangi operasi lain. Dalam konteks pengembangan web, pemrograman asinkron digunakan untuk meningkatkan kinerja dan responsifitas aplikasi web. AJAX (Asynchronous JavaScript and XML) adalah teknik yang menggunakan pemrograman asinkron untuk mengirim dan menerima data dari server web tanpa perlu me-refresh seluruh halaman web.
+
+Berikut penjelasan mengenai penerapan pemrograman asinkron pada AJAX, beserta contohnya:
+
+### Objek XMLHttpRequest(XHR)
+Objek XMLHttpRequest adalah dasar dari AJAX dan memungkinkan Anda untuk mengirimkan permintaan HTTP ke server web secara asynchronous.
+
+### Penanganan Event
+Operasi asynchronous dalam AJAX dikelola melalui penanganan event. Penanganan event ini dipicu ketika suatu tindakan asynchronous, seperti penyelesaian permintaan HTTP, terjadi.
+
+## Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial)
+
+### :white_check_mark: Mengubah tugas 5 yang telah dibuat sebelumnya menjadi menggunakan AJAX
+
+Untuk bagian ini, saya menggunakan AJAX GET dan AJAX POST. Pertama, saya lakukan dengan membuat dua fungsi baru, pertama untuk get json dan kedua untuk menambahkan item baru menggunakan AJAX. Untuk metode get, saya lakukan dengan menambahkan views baru bernama ```get_product_json``` untuk mengembalikan data JSON dan menampilkan data produk pada HTML dengan ```fetch ```. Kemudian, pada main.html saya akan menambahkan script untuk AJAX yang diisi fungsi ```getProducts()``` yang akan menggunakan ```fetch()``` API ke data JSON secara _asynchronus_ yang kemudian akan melakukan _parse_ dengan fungsi ```then()``` untuk mengubah data JSON menjadi objek JavaScript. Kemudian, saya menambahkan function ```refreshProducts()``` pada script yang akan menampilkan card product saya. Kode yang saya masukkan adalah
+
+```
+            const productTable = document.getElementById("product_table");
+            productTable.innerHTML = "";
+
+            const products = await getProducts();
+            let htmlString = "<div class='row'>";  // Start a new row
+
+            products.forEach((item, index) => {
+                if (index % 3 === 0 && index !== 0) {
+                    htmlString += "</div><div class='row'>";  // Close previous row and start a new row for every 3 cards
+                }
+
+                htmlString += `
+                    <div class="col-md-4">
+                        <div class="card-item">
+                            <div class="card mx-auto p-3" style="width: 18rem;">
+                                <div class="card-body">
+                                    <h2 class="card-title">${item.fields.name}</h2>
+                                    <p class="card-text">Amount: ${item.fields.amount}</p>
+                                    <p class="card-text">Price: ${item.fields.price}</p>
+                                    <p class="card-text">${item.fields.description}</p>
+                                    <p class="card-text">Category: ${item.fields.category}</p>
+                                    <a style="justify-content: baseline;" href='edit-item/${item.pk}' class="btn btn-outline-warning" onclick="editItem(${item.pk})">Edit</a>
+                                    <button style="justify-content: baseline;" class="btn btn-outline-danger" onclick="deleteProduct(${item.pk})">Delete</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>`;
+            });
+
+            htmlString += "</div>";  // Close the last row
+            productTable.innerHTML = htmlString;
+```
+
+Fungsi ```refreshProducts()``` akan digunakan untuk memanggil fungsi tersebut lagi apabila user membuka halaman web.
+
+Untuk AJAX POST, saya mulai dengan membuat sebuah fungsi baru ```add_product_ajax``` pada views.py. Saya menggunakan ```@csrf_exempt``` melalui ```from django.views.decorators.csrf import csrf_exempt```. Fungsi ```add_product_ajax``` akan mengambil value dari model dan akan membuat object baru dengan parameter sesuai values dari request.
+
+Selanjutnya, saya tambahkan url dari kedua fungsi tersebut di urls.py
+
+```
+    path('get-product/', get_product_json, name='get_product_json'),
+    path('create-ajax/', add_product_ajax, name='add_product_ajax'),
+```
+
+Setelah mempersiapakan function, saya mulai mengeksekusi di ```main.html``` dengan mengubah fitur table card item saya menjadi ajax. Pertama, saya tambahkan kode
+```
+<div class="card-container" id="product_table"></div>
+```
+Kode tersebut dibuat untuk menampilkan struktur card yang sudah dibuat di atas.
+
+Selanjutnya, saya tambahkan kode untuk mengimplementasikan modal Bootstrap pada aplikasi. Modal bootstrap ini akan menjadi struktur form yang terhubung dengan AJAX. Form pada modal tersebut saya sesuaikan dengan model pada aplikasi Glowventory. Di akhir block code ```<Script>``` tidak lupa saya tambahkan pemanggilan fungsi ```refreshProduct()``` yang nantinya akan menampilkan daftar item terbaru tanpa reload halaman utama secara keseluruhan. Terakhir saya tambahkan ```button``` yang akan menampilkan modal dan juga mengclose dengan kode
+```
+<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+<button type="button" class="btn btn-primary" id="button_add" data-bs-dismiss="modal">Add Item</button>
+```
+
+Selain itu, saya menambahkan beberapa fungsi pada block ```<Script>``` saya untuk menambahkan item, menghapus, dan mengedit item dengan kode block seperti berikut.
+
+```
+function addProduct() {
+    fetch("{% url 'main:add_product_ajax' %}", {
+        method: "POST",
+        body: new FormData(document.querySelector('#form'))
+    }).then(refreshProducts)
+
+    document.getElementById("form").reset()
+    return false
+}
+
+function editProduct(productId) {
+    fetch(`{% url 'main:edit_item' 0 %}${productId}/`, {
+    method: "POST",
+    body: new FormData(document.querySelector('#form'))
+}).then(refreshProducts)
+
+document.getElementById("form").reset()
+return false
+}
+
+function deleteProduct(productId) {
+    fetch(`{% url 'main:delete' 0 %}`.replace("0", productId), {
+        method: "POST",
+        body: new FormData(document.querySelector('#form'))
+    }).then(refreshProducts)
+
+    document.getElementById("form").reset()
+    return false
+}
+```
+
+### :white_check_mark: Melakukan perintah collectstatic
+
+Untuk bagian ini saya mulai dengan menambahkan ```STATIC_ROOT``` pada ```settings.py``` saya. Kemudian, saya tambahkan potongan kode
+```STATIC_ROOT = os.path.join(BASE_DIR, 'static')``` 
+yang akan menentukan absolute path ke direktori static files ketika menjalankan perintah collectstatic. Kemudian saya lanjutkan dengan menjalankan perintah ```collectstatic``` dengan menjalankan perintah ```python manage.py collectstatic``` yang kemudian akan membuat sebuah direktori ```static/admin``` baru pada proyek saya.
+
+
+
+
+
